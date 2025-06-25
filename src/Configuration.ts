@@ -43,12 +43,6 @@ export interface Configuration {
 
 const configurations: Configuration[] = [
   {
-    branchName: 'development',
-    buildEnvironment: Statics.buildEnvironment,
-    deploymentEnvironment: Statics.developmentEnvironment,
-    criticality: new Criticality('low'),
-  },
-  {
     branchName: 'acceptance',
     buildEnvironment: Statics.buildEnvironment,
     deploymentEnvironment: Statics.acceptanceEnvironment,

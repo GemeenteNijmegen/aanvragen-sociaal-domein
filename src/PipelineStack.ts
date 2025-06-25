@@ -3,8 +3,8 @@ import { Aspects, CfnParameter, Stack, StackProps, Tags, pipelines } from 'aws-c
 import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
 import { Construct } from 'constructs';
 import { Configurable } from './Configuration';
-import { MainStage } from './MainStage';
 import { ParameterStage } from './Parameters';
+import { SocialSubmissionsStage } from './SocialSubmissionsStage';
 import { Statics } from './Statics';
 
 export interface PipelineStackProps extends StackProps, Configurable { }
@@ -41,7 +41,7 @@ export class PipelineStack extends Stack {
     pipeline.addStage(parameters);
 
     // API stage
-    const api = new MainStage(this, Statics.projectName, {
+    const api = new SocialSubmissionsStage(this, Statics.projectName, {
       env: this.props.configuration.deploymentEnvironment,
       configuration: this.props.configuration,
     });

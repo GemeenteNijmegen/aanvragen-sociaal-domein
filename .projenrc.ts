@@ -3,7 +3,6 @@ const project = new GemeenteNijmegenCdkApp({
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
   devDeps: ['@gemeentenijmegen/projen-project-type'],
-  makeSampleFiles: true,
   name: 'aanvragen-sociaal-domein',
   projenrcTs: true,
 
