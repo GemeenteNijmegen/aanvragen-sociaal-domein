@@ -20,17 +20,12 @@ export class Statics {
     region: 'eu-central-1',
   };
 
-  static readonly productionEnvironment = {
-    account: '',
-    region: 'eu-central-1',
-  };
-
-  static readonly acceptanceEnvironment = {
+  static readonly gnOpenFormsAccp = {
     account: '043309345347',
     region: 'eu-central-1',
   };
 
-  static readonly developmentEnvironment = {
+  static readonly gnOpenFormsProd = {
     account: '761018864362',
     region: 'eu-central-1',
   };
