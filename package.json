@@ -4,6 +4,8 @@
     "build": "npx projen build",
     "bump": "npx projen bump",
     "bundle": "npx projen bundle",
+    "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda": "npx projen bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda",
+    "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch": "npx projen bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch",
     "clobber": "npx projen clobber",
     "compile": "npx projen compile",
     "default": "npx projen default",
@@ -28,7 +30,11 @@
     "projen": "npx projen"
   },
   "devDependencies": {
+    "@aws-lambda-powertools/logger": "^2.24.1",
+    "@aws-sdk/client-sqs": "^3.859.0",
+    "@gemeentenijmegen/aws-constructs": "^0.0.39",
     "@gemeentenijmegen/projen-project-type": "^1.11.0",
+    "@gemeentenijmegen/utils": "^0.0.35",
     "@stylistic/eslint-plugin": "^2",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.10",
@@ -36,6 +42,7 @@
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2",
     "commit-and-tag-version": "^12",
+    "dotenv": "^17.2.1",
     "esbuild": "^0.25.6",
     "eslint": "^9",
     "eslint-import-resolver-typescript": "^4.4.4",
@@ -45,7 +52,8 @@
     "projen": "^0.94.0",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "zod": "^4.0.14"
   },
   "dependencies": {
     "@gemeentenijmegen/aws-constructs": "^0.0.39",
@@ -59,6 +67,9 @@
   "version": "0.0.0",
   "jest": {
     "coverageProvider": "v8",
+    "setupFiles": [
+      "dotenv/config"
+    ],
     "testMatch": [
       "<rootDir>/@(src|test)/**/*(*.)@(spec|test).ts?(x)",
       "<rootDir>/@(src|test)/**/__tests__/**/*.ts?(x)",

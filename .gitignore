@@ -30,6 +30,7 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+**/output/
 test-reports/junit.xml
 test/__snapshots__/*
 .env
@@ -58,6 +59,7 @@ junit.xml
 /cdk.out/
 .cdk.staging/
 .parcel-cache/
+!/src/submission-processor/sociaal-receiver-lambda/sociaal-receiver-function.ts
 !/.github/workflows/emergency.yml
 !/.github/workflows/auto-merge.yml
 !/.projenrc.ts

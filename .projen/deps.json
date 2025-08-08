@@ -1,7 +1,23 @@
 {
   "dependencies": [
     {
+      "name": "@aws-lambda-powertools/logger",
+      "type": "build"
+    },
+    {
+      "name": "@aws-sdk/client-sqs",
+      "type": "build"
+    },
+    {
+      "name": "@gemeentenijmegen/aws-constructs",
+      "type": "build"
+    },
+    {
       "name": "@gemeentenijmegen/projen-project-type",
+      "type": "build"
+    },
+    {
+      "name": "@gemeentenijmegen/utils",
       "type": "build"
     },
     {
@@ -35,6 +51,10 @@
     {
       "name": "commit-and-tag-version",
       "version": "^12",
+      "type": "build"
+    },
+    {
+      "name": "dotenv",
       "type": "build"
     },
     {
@@ -77,6 +97,10 @@
     },
     {
       "name": "typescript",
+      "type": "build"
+    },
+    {
+      "name": "zod",
       "type": "build"
     },
     {
