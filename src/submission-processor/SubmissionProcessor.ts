@@ -62,6 +62,8 @@ export class SubmissionProcessor extends Construct {
       reportBatchItemFailures: true,
     } as SqsEventSourceProps),
     );
+    this.esbQueu.queue.grantSendMessages(sociaalReceiverLambda);
+    this.kmsKey.grantDecrypt(sociaalReceiverLambda)
   }
   private setupESBQueue() {
     const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
