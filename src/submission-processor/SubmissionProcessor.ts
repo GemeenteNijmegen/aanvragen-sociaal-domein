@@ -52,6 +52,7 @@ export class SubmissionProcessor extends Construct {
         timeout: Duration.seconds(30),
         environment: {
           ESB_QUEUE_URL: this.esbQueu.queue.queueUrl,
+          POWERTOOLS_LOG_LEVEL: this.options.logLevel ?? 'INFO',
         },
       },
     );
@@ -63,7 +64,7 @@ export class SubmissionProcessor extends Construct {
     } as SqsEventSourceProps),
     );
     this.esbQueu.queue.grantSendMessages(sociaalReceiverLambda);
-    this.kmsKey.grantDecrypt(sociaalReceiverLambda)
+    this.kmsKey.grantDecrypt(sociaalReceiverLambda);
   }
   private setupESBQueue() {
     const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
