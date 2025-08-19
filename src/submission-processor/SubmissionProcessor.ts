@@ -1,4 +1,5 @@
 import { Criticality, QueueWithDlq } from '@gemeentenijmegen/aws-constructs';
+import { Duration } from 'aws-cdk-lib';
 import { Role } from 'aws-cdk-lib/aws-iam';
 import { IKey, Key } from 'aws-cdk-lib/aws-kms';
 import { SqsEventSource, SqsEventSourceProps } from 'aws-cdk-lib/aws-lambda-event-sources';
@@ -41,20 +42,26 @@ export class SubmissionProcessor extends Construct {
     const inputQueueSociaalArn = StringParameter.fromStringParameterName(this, 'shared-submission-sqs-sociaal-arn-ssm', Statics.ssmSharedSubmissionSQSSociaalArn).stringValue;
     this.inputQueueSociaal = Queue.fromQueueArn(this, 'input-queue-sociaal', inputQueueSociaalArn) as Queue;
 
+    this.esbQueu = this.setupESBQueue();
     this.setupSociaalReceiverLambda();
-
-    this.setupESBQueue();
   }
 
   private setupSociaalReceiverLambda() {
     const sociaalReceiverLambda = new SociaalReceiverFunction(
       this, 'sociaal-receiver-lambda', {
+        timeout: Duration.seconds(30),
         environment: {
+          ESB_QUEUE_URL: this.esbQueu.queue.queueUrl,
         },
       },
     );
     this.inputQueueSociaal.grantConsumeMessages(sociaalReceiverLambda);
-    sociaalReceiverLambda.addEventSource(new SqsEventSource(this.inputQueueSociaal, { batchSize: 1 } as SqsEventSourceProps));
+    sociaalReceiverLambda.addEventSource(new SqsEventSource(this.inputQueueSociaal, {
+      batchSize: 1,
+      maxBatchingWindow: Duration.seconds(5),
+      reportBatchItemFailures: true,
+    } as SqsEventSourceProps),
+    );
   }
   private setupESBQueue() {
     const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
@@ -68,8 +75,6 @@ export class SubmissionProcessor extends Construct {
       role: esbRole,
       grantDlqSend: true,
     });
-    this.esbQueu = esbQueue;
+    return esbQueue;
   };
-
-
 }
