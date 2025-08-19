@@ -41,7 +41,7 @@ export interface Configuration {
   /**
    * logLevel, default INFO
   */
- logLevel?: string;
+  logLevel?: string;
 
 }
 
@@ -51,14 +51,14 @@ const configurations: Configuration[] = [
     buildEnvironment: Statics.buildEnvironment,
     deploymentEnvironment: Statics.gnOpenFormsAccp,
     criticality: new Criticality('medium'),
-    logLevel: 'DEBUG'
+    logLevel: 'DEBUG',
   },
   {
     branchName: 'main',
     buildEnvironment: Statics.buildEnvironment,
     deploymentEnvironment: Statics.gnOpenFormsProd,
     criticality: new Criticality('high'),
-    logLevel: 'INFO'
+    logLevel: 'INFO',
   },
 ];
 

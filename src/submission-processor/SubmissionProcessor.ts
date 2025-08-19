@@ -34,7 +34,8 @@ export class SubmissionProcessor extends Construct {
   constructor(scope: Construct, id: string, private readonly options: SubmissionProcessorOptions) {
     super(scope, id);
 
-    this.kmsKey = Key.fromLookup(this, 'open-forms-account-kms-key', { aliasName: Statics.ALIAS_ACCOUNT_KMS_KEY });
+    const kmsKeyArn = StringParameter.fromStringParameterName(this, 'kms-key-account-from-arn-ssm', Statics.ssmAccountSharedKmsKeyArn).stringValue;
+    this.kmsKey = Key.fromKeyArn(this, 'kms-key-account-from-arn', kmsKeyArn);
 
     // Retrieve shared Sociaal Queue
     const inputQueueSociaalArn = StringParameter.fromStringParameterName(this, 'shared-submission-sqs-sociaal-arn-ssm', Statics.ssmSharedSubmissionSQSSociaalArn).stringValue;
