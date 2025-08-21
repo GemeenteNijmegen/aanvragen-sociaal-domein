@@ -15,7 +15,7 @@ const project = new GemeenteNijmegenCdkApp({
     '@gemeentenijmegen/aws-constructs',
     '@aws-lambda-powertools/idempotency',
     '@aws-lambda-powertools/batch',
-    '@middy/core',
+    '@middy/core@5.5.1',
     '@types/aws-lambda',
   ],
   jestOptions: {
