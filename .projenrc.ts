@@ -7,7 +7,6 @@ const project = new GemeenteNijmegenCdkApp({
     '@aws-sdk/client-sqs',
     '@aws-lambda-powertools/logger',
     '@aws-lambda-powertools/tracer',
-    '@middy/core',
     'zod',
   ],
   devDeps: [
@@ -16,6 +15,7 @@ const project = new GemeenteNijmegenCdkApp({
     '@gemeentenijmegen/aws-constructs',
     '@aws-lambda-powertools/idempotency',
     '@aws-lambda-powertools/batch',
+    '@middy/core',
     '@types/aws-lambda',
   ],
   jestOptions: {

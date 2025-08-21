@@ -17,6 +17,10 @@
       "type": "build"
     },
     {
+      "name": "@middy/core",
+      "type": "build"
+    },
+    {
       "name": "@stylistic/eslint-plugin",
       "version": "^2",
       "type": "build"
@@ -117,10 +121,6 @@
     },
     {
       "name": "@gemeentenijmegen/utils",
-      "type": "runtime"
-    },
-    {
-      "name": "@middy/core",
       "type": "runtime"
     },
     {

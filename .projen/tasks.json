@@ -313,13 +313,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-lambda-powertools/batch,@aws-lambda-powertools/idempotency,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@types/aws-lambda,@types/jest,@types/node,dotenv,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-lambda-powertools/tracer,@aws-sdk/client-sqs,@gemeentenijmegen/utils,@middy/core,zod"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-lambda-powertools/batch,@aws-lambda-powertools/idempotency,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@middy/core,@types/aws-lambda,@types/jest,@types/node,dotenv,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-lambda-powertools/tracer,@aws-sdk/client-sqs,@gemeentenijmegen/utils,zod"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-lambda-powertools/batch @aws-lambda-powertools/idempotency @gemeentenijmegen/aws-constructs @gemeentenijmegen/projen-project-type @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version dotenv esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-lambda-powertools/logger @aws-lambda-powertools/tracer @aws-sdk/client-sqs @gemeentenijmegen/utils @middy/core aws-cdk-lib constructs zod"
+          "exec": "yarn upgrade @aws-lambda-powertools/batch @aws-lambda-powertools/idempotency @gemeentenijmegen/aws-constructs @gemeentenijmegen/projen-project-type @middy/core @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version dotenv esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-lambda-powertools/logger @aws-lambda-powertools/tracer @aws-sdk/client-sqs @gemeentenijmegen/utils aws-cdk-lib constructs zod"
         },
         {
           "exec": "npx projen"
