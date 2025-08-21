@@ -18,7 +18,6 @@
     },
     {
       "name": "@middy/core",
-      "version": "5.5.1",
       "type": "build"
     },
     {
