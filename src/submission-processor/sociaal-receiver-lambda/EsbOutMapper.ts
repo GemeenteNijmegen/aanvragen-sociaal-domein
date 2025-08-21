@@ -17,7 +17,7 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
   const zaakDMS = {
     zaaknummer: submissionData.zaaknummer,
     zaaktype: inputObject.zaaktypeIdentificatie,
-    fileObjects: inputObject.fileObjects,
+    fileObjects: input.fileObjects,
   };
 
 
