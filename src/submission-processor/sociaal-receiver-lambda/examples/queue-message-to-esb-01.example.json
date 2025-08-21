@@ -1,0 +1,77 @@
+{
+  "submissionData": {
+    "zaaknummer": "Z-087623487-8324",
+    "formReference": "OF-7623DV",
+    "formName": "aanvraag-levensonderhoud"
+  },
+  "zaakDMS": {
+    "zaaknummer": "Z-087623487-8324",
+    "zaaktype": "ALO-ZAAKTYPE",
+    "fileObjects": [
+      {
+        "bucket": "mybucket",
+        "objectKey": "TDL123.01/TDL123.01.pdf",
+        "fileName": "TDL123.01.pdf"
+      },
+      {
+        "bucket": "mybucket",
+        "objectKey": "TDL123.01/attachments/test.png",
+        "fileName": "attachments/test.png"
+      }
+    ]
+  },
+  "werkprocesIntake": {
+    "Webintake": {
+      "Berichtsoort": {
+        "VRIJ": {
+          "Onderwerp": "Aanvraag ALO",
+          "Categorie": "Participatiewet"
+        }
+      },
+      "Aanvraagdatum": "2025-06-15T10:30:00Z",
+      "ZaakIdentificatie": "Z-087623487-8324",
+      "Toelichting": "Testaanvraag vanuit systeem",
+      "Client": {
+        "BurgerServiceNr": "123456789",
+        "Voornamen": "Jan Pieter",
+        "Achternaam": "De Vries",
+        "Geslacht": "M",
+        "Geboortedatum": "1980-02-20",
+        "Correspondentieadres": {
+          "Straatnaam": "Dorpsstraat",
+          "Huisnummer": "10",
+          "Postcode": "1234AB",
+          "Woonplaatsnaam": "Nederasselt"
+        },
+        "Nationaliteit": {
+          "CdNationaliteit": "NL"
+        },
+        "Telefoonnr": [
+          {
+            "Netnr": "024",
+            "Abonneenr": "1234567",
+            "TypeTelefoonnr": "Mobiel"
+          }
+        ],
+        "EMailAdresClient": "jan.devries@example.com",
+        "Relatie": {
+          "SoortRelatie": "Partner",
+          "Begindatum": "2010-05-01",
+          "Partner": {
+            "BurgerServiceNr": "987654321",
+            "Voornamen": "Anna Maria",
+            "Achternaam": "De Vries",
+            "Geslacht": "V",
+            "Geboortedatum": "1982-11-15",
+            "Correspondentieadres": {
+              "Straatnaam": "Dorpsstraat",
+              "Huisnummer": "10",
+              "Postcode": "1234AB",
+              "Woonplaatsnaam": "Nederasselt"
+            }
+          }
+        }
+      }
+    }
+  }
+}
