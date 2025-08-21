@@ -5,13 +5,17 @@ const project = new GemeenteNijmegenCdkApp({
   deps: [
     '@gemeentenijmegen/utils',
     '@aws-sdk/client-sqs',
+    '@aws-lambda-powertools/logger',
+    '@aws-lambda-powertools/tracer',
+    '@middy/core',
     'zod',
   ],
   devDeps: [
     '@gemeentenijmegen/projen-project-type',
     'dotenv',
     '@gemeentenijmegen/aws-constructs',
-    '@aws-lambda-powertools/logger',
+    '@aws-lambda-powertools/idempotency',
+    '@aws-lambda-powertools/batch',
     '@types/aws-lambda',
   ],
   jestOptions: {

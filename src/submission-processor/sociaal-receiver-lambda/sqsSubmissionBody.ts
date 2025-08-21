@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 
-// Tighten later on
+// looseObject vervangen later
 export const SqsSubmissionBodySchema = z.looseObject({
   enrichedObject: z.looseObject({
     pdf: z.string().optional(),
@@ -11,8 +11,8 @@ export const SqsSubmissionBodySchema = z.looseObject({
     objectUUID: z.string(), // later: .uuid()
     sociaalDomeinRegeling: z.string().optional(),
     zaaktypeIdentificatie: z.string().optional(),
-    datumAanvraag: z.string().optional(), // later: regex YYYY-MM-DD
-    bsn: z.string(), // later: regex 9 digits
+    datumAanvraag: z.string().optional(),
+    bsn: z.string(),
     formName: z.string(),
   }),
   filePaths: z.array(z.string()),
@@ -20,7 +20,8 @@ export const SqsSubmissionBodySchema = z.looseObject({
     z.looseObject({
       bucket: z.string(),
       objectKey: z.string(),
-      fileName: z.string(), // submission or attachment added later on
+      fileName: z.string(),
+      objectType: z.string().optional(),
     }),
   ),
 });

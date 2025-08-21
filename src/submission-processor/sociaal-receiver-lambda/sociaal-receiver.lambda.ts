@@ -1,38 +1,49 @@
+import { BatchProcessor, EventType, processPartialResponse } from '@aws-lambda-powertools/batch';
 import { Logger } from '@aws-lambda-powertools/logger';
-import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
+import { Tracer } from '@aws-lambda-powertools/tracer';
+import { captureLambdaHandler } from '@aws-lambda-powertools/tracer/middleware';
+import { SQSClient } from '@aws-sdk/client-sqs';
 import { environmentVariables } from '@gemeentenijmegen/utils';
-import { SqsSubmissionBodySchema } from './sqsSubmissionBody';
+import middy from '@middy/core';
+import type { SQSEvent, SQSHandler, SQSRecord } from 'aws-lambda';
+import { SociaalReceiverHandler, SociaalReceiverHandlerProps } from './SociaalReceiverHandler';
 
-const logger = new Logger({ serviceName: 'sociaal-receiver-lambda' });
-const env = environmentVariables(['ESB_QUEUE_URL']);
 
-const sqs = new SQSClient({});
+const processor = new BatchProcessor(EventType.SQS);
 
-export async function handler(event: any) {
-  logger.debug('Lambda handler raw event', { event });
-  const queueUrl = env.ESB_QUEUE_URL;
-  const failures: { itemIdentifier: string }[] = [];
+const tracer = new Tracer({
+  serviceName: 'sociaal-receiver',
+});
+tracer.annotateColdStart(); // Hier nog naar kijken, levert onnodige errors op in logs
+tracer.addServiceNameAnnotation();
 
-  for (const record of event.Records) {
-    try {
-      const parsed = SqsSubmissionBodySchema.parse(JSON.parse(record.body));
+const logger = new Logger({ serviceName: 'sociaal-receiver' });
 
-      const groupId = parsed.enrichedObject.zaaktypeIdentificatie || 'sociaal';
-      const dedupId = parsed.enrichedObject.reference;
-
-      await sqs.send(new SendMessageCommand({
-        QueueUrl: queueUrl,
-        MessageBody: JSON.stringify(parsed),
-        MessageGroupId: groupId,
-        MessageDeduplicationId: dedupId,
-      }));
-
-      logger.debug('Forwarded to ESB', { messageId: record.messageId, groupId, dedupId });
-    } catch (err) {
-      failures.push({ itemIdentifier: record.messageId });
-      logger.error('Failed to process record', { messageId: record.messageId, err: (err as Error).message });
-    }
-  }
-
-  return { batchItemFailures: failures };
+async function initalize(): Promise<SociaalReceiverHandlerProps> {
+  const env = environmentVariables(['ESB_QUEUE_URL']);
+  const sqs = new SQSClient({});
+  return {
+    esbQueueUrl: env.ESB_QUEUE_URL,
+    sqs,
+    tracer,
+    logger,
+  };
 }
+
+export async function recordHandler(record: SQSRecord, props: SociaalReceiverHandlerProps) {
+  logger.debug('recordHandler before handler');
+  try {
+    const handler = new SociaalReceiverHandler(props);
+    await handler.handle(record);
+  } catch (error) {
+    props.logger.error('Error during processing of record', error as Error);
+    props.tracer?.addErrorAsMetadata(error as Error);
+    throw Error('Failed to handle SQS message');
+  }
+}
+
+export const handler: SQSHandler = middy(async (event: SQSEvent) => {
+  const configuration = await initalize();
+  const configuredRecordHandler = (record: SQSRecord) => recordHandler(record, configuration);
+  await processPartialResponse(event, configuredRecordHandler, processor);
+}).use(captureLambdaHandler(tracer));

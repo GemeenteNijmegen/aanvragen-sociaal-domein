@@ -30,7 +30,8 @@
     "projen": "npx projen"
   },
   "devDependencies": {
-    "@aws-lambda-powertools/logger": "^2.25.1",
+    "@aws-lambda-powertools/batch": "^2.25.1",
+    "@aws-lambda-powertools/idempotency": "^2.25.1",
     "@gemeentenijmegen/aws-constructs": "^0.0.41",
     "@gemeentenijmegen/projen-project-type": "^1.11.2",
     "@stylistic/eslint-plugin": "^2",
@@ -54,9 +55,12 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
+    "@aws-lambda-powertools/logger": "^2.25.1",
+    "@aws-lambda-powertools/tracer": "^2.25.1",
     "@aws-sdk/client-sqs": "^3.864.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.41",
     "@gemeentenijmegen/utils": "^0.0.35",
+    "@middy/core": "^6.4.3",
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5",
     "zod": "^4.0.17"
