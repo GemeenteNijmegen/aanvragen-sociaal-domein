@@ -28,10 +28,12 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
     logger.debug('Let op geboortedatum, vooral format YYYYMMDD');
     if (!parsed.success) return undefined;
 
-    const { Geboortedatum, ...rest } = parsed.data;
+    const { Geboortedatum, Geslacht, ...rest } = parsed.data;
     const parsedClient: Client = {
       ...rest,
       Geboortedatum: Geboortedatum.replaceAll('-', ''),
+      CdFictieveGeboortedat: '0', // Bij Functioneel checken wat dit in het proces aangeeft en de andere waarden zijn
+      Geslacht: Geslacht == 'vrouw' ? '2' : '1', // opties 0,1,2,9 en bij Functioneel checken wat dit doet
     };
 
     return parsedClient;
@@ -40,7 +42,7 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
   const werkprocesIntake = client
     ? {
       Webintake: {
-        Berichtsoort: { WWB: { Onderwerp: '1', Categorie: '1' } }, // ecode voorbeeld, nog flexibeler maken en checken
+        Berichtsoort: { WWB: { Onderwerp: '01', Categorie: '01' } }, // ecode voorbeeld, nog flexibeler maken en checken
         AardVerzoek: 'RT',
         Aanvraagdatum: inputObject.datumAanvraag ? inputObject.datumAanvraag.replaceAll('-', '') : '20250101', //YYYYMMDD betere functie maken en anders huidige datum ophalen
         ZaakIdentificatie: submissionData.zaaknummer, //OF-
