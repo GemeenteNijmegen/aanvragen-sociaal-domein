@@ -25,16 +25,16 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
     if (!inputObject.client) return undefined;
     const parsed = ClientSchema.safeParse(inputObject.client);
     logger.debug('Parse Client', parsed);
-    logger.debug('Let op geboortedatum, vooral format');
+    logger.debug('Let op geboortedatum, vooral format YYYYMMDD');
     return parsed.success ? parsed.data : undefined;
   })();
 
   const werkprocesIntake = client
     ? {
       Webintake: {
-        Berichtsoort: { WWB: { Onderwerp: 'Aanvraag ALO', Categorie: '1' } }, // ecode voorbeeld, nog flexibeler maken en checken
+        Berichtsoort: { WWB: { Onderwerp: '1', Categorie: '1' } }, // ecode voorbeeld, nog flexibeler maken en checken
         AardVerzoek: 'RT',
-        Aanvraagdatum: inputObject.datumAanvraag,
+        Aanvraagdatum: inputObject.datumAanvraag, //YYYYMMDD
         ZaakIdentificatie: submissionData.zaaknummer,
         Toelichting: `Form: ${inputObject.formName}`,
         Client: client,
