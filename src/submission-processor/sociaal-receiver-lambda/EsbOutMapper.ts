@@ -30,10 +30,10 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
 
     const { Geboortedatum, Geslacht, ...rest } = parsed.data;
     const parsedClient: Client = {
-      ...rest,
       Geboortedatum: Geboortedatum.replaceAll('-', ''),
       CdFictieveGeboortedat: '0', // Bij Functioneel checken wat dit in het proces aangeeft en de andere waarden zijn
       Geslacht: Geslacht == 'vrouw' ? '2' : '1', // opties 0,1,2,9 en bij Functioneel checken wat dit doet
+      ...rest,
     };
 
     return parsedClient;
