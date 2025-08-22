@@ -26,7 +26,15 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
     const parsed = ClientSchema.safeParse(inputObject.client);
     logger.debug('Parse Client', parsed);
     logger.debug('Let op geboortedatum, vooral format YYYYMMDD');
-    return parsed.success ? parsed.data : undefined;
+    if (!parsed.success) return undefined;
+
+    const { Geboortedatum, ...rest } = parsed.data;
+    const parsedClient: Client = {
+      ...rest,
+      Geboortedatum: Geboortedatum.replaceAll('-', ''),
+    };
+
+    return parsedClient;
   })();
 
   const werkprocesIntake = client
@@ -34,9 +42,9 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
       Webintake: {
         Berichtsoort: { WWB: { Onderwerp: '1', Categorie: '1' } }, // ecode voorbeeld, nog flexibeler maken en checken
         AardVerzoek: 'RT',
-        Aanvraagdatum: inputObject.datumAanvraag, //YYYYMMDD
-        ZaakIdentificatie: submissionData.zaaknummer,
-        Toelichting: `Form: ${inputObject.formName}`,
+        Aanvraagdatum: inputObject.datumAanvraag ? inputObject.datumAanvraag.replaceAll('-', '') : '20250101', //YYYYMMDD betere functie maken en anders huidige datum ophalen
+        ZaakIdentificatie: submissionData.zaaknummer, //OF-
+        Toelichting: `Form: ${inputObject.formName}`, // Max. tekens
         Client: client,
       },
     }
