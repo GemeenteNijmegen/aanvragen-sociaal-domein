@@ -30,6 +30,7 @@ export class SubmissionProcessor extends Construct {
   private kmsKey: IKey;
   private inputQueueSociaal: IQueue;
   private esbQueu: QueueWithDlq;
+  private esbIITQueue: QueueWithDlq;
 
 
   constructor(scope: Construct, id: string, private readonly options: SubmissionProcessorOptions) {
@@ -43,6 +44,7 @@ export class SubmissionProcessor extends Construct {
     this.inputQueueSociaal = Queue.fromQueueArn(this, 'input-queue-sociaal', inputQueueSociaalArn) as Queue;
 
     this.esbQueu = this.setupESBQueue();
+    this.esbIITQueue = this.setupESBIITQueue();
     this.setupSociaalReceiverLambda();
   }
 
@@ -52,6 +54,7 @@ export class SubmissionProcessor extends Construct {
         timeout: Duration.seconds(30),
         environment: {
           ESB_QUEUE_URL: this.esbQueu.queue.queueUrl,
+          ESB_IIT_QUEUE_URL: this.esbIITQueue.queue.queueUrl,
           POWERTOOLS_LOG_LEVEL: this.options.logLevel ?? 'INFO',
         },
       },
@@ -64,6 +67,7 @@ export class SubmissionProcessor extends Construct {
     } as SqsEventSourceProps),
     );
     this.esbQueu.queue.grantSendMessages(sociaalReceiverLambda);
+    this.esbIITQueue.queue.grantSendMessages(sociaalReceiverLambda);
     this.kmsKey.grantDecrypt(sociaalReceiverLambda);
   }
   private setupESBQueue() {
@@ -79,5 +83,25 @@ export class SubmissionProcessor extends Construct {
       grantDlqSend: true,
     });
     return esbQueue;
+  };
+
+  /**
+   * Temporary queue until we can use the regular sociaal aanvragen route. 
+   * This requires a zaakdms process in Suite, which cannot be made right now.
+   * Goal to delete this within a year.
+   */
+  private setupESBIITQueue() {
+    const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-iit-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
+    const esbRole = Role.fromRoleArn(this, 'esb-iit-role-account-shared', esbRoleArn) as Role;
+
+    const esbIITQueue = new QueueWithDlq(this, 'esb-iit-queue-with-dlq-sociaal-aanvragen', {
+      identifier: 'esb-iit-aanvragen',
+      kmsKey: this.kmsKey,
+      fifo: true,
+      criticality: this.options.criticality,
+      role: esbRole,
+      grantDlqSend: true,
+    });
+    return esbIITQueue;
   };
 }
