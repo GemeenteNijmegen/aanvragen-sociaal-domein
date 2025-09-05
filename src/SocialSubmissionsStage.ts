@@ -18,8 +18,7 @@ export class SocialSubmissionsStage extends Stage {
     /**
      * Main stack of this project for Submissions in Social Domain
      */
-    new SocialSubmissionsStack(this, 'stack', {
-      env: props.configuration.deploymentEnvironment,
+    new SocialSubmissionsStack(this, 'sociaal-submission-stack', {
       configuration: props.configuration,
     });
 

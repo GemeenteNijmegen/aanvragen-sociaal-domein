@@ -44,7 +44,30 @@
     },
     "bundle": {
       "name": "bundle",
-      "description": "Prepare assets"
+      "description": "Prepare assets",
+      "steps": [
+        {
+          "spawn": "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda"
+        }
+      ]
+    },
+    "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda": {
+      "name": "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda",
+      "description": "Create a JavaScript bundle from src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node22\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+        }
+      ]
+    },
+    "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch": {
+      "name": "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch",
+      "description": "Continuously update the JavaScript bundle from src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts",
+      "steps": [
+        {
+          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node22\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+        }
+      ]
     },
     "clobber": {
       "name": "clobber",
@@ -290,13 +313,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@gemeentenijmegen/projen-project-type,@types/jest,@types/node,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@gemeentenijmegen/aws-constructs"
+          "exec": "npx npm-check-updates@16 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-lambda-powertools/batch,@aws-lambda-powertools/idempotency,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@middy/core,@types/aws-lambda,@types/jest,@types/node,dotenv,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,projen,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-lambda-powertools/tracer,@aws-sdk/client-sqs,@gemeentenijmegen/utils,zod"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @gemeentenijmegen/projen-project-type @stylistic/eslint-plugin @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @gemeentenijmegen/aws-constructs aws-cdk-lib constructs"
+          "exec": "yarn upgrade @aws-lambda-powertools/batch @aws-lambda-powertools/idempotency @gemeentenijmegen/aws-constructs @gemeentenijmegen/projen-project-type @middy/core @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version dotenv esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-lambda-powertools/logger @aws-lambda-powertools/tracer @aws-sdk/client-sqs @gemeentenijmegen/utils aws-cdk-lib constructs zod"
         },
         {
           "exec": "npx projen"

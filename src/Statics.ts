@@ -35,4 +35,23 @@ export class Statics {
   static readonly accountHostedzoneName = '/gemeente-nijmegen/account/hostedzone/name';
   static readonly accountHostedzoneId = '/gemeente-nijmegen/account/hostedzone/id';
 
+  /**
+ * KMS account key alias
+  */
+  static readonly ALIAS_ACCOUNT_KMS_KEY = 'alias/open-forms-account-kms-key';
+  /**
+   * KMS key arn in SSM param
+   */
+  static readonly ssmAccountSharedKmsKeyArn = '/shared/kmskey/arn'; // Do not change or remove
+
+  /**
+   * Shared ARN SSM parameter names
+   * These params point to shared resources in the Open Forms account
+   * The role and sqs are used in two different Github repo's, but are present in the same gn-account
+   * This repo sets the params, which will be retrieved by aanvragen-sociaal-domein github repo
+   */
+  static readonly ssmSharedSubmissionEsbRoleArn = '/shared/submission/esbrole/arn'; // Do not change or remove
+  static readonly ssmSharedSubmissionSQSSociaalArn = '/shared/submission/sqs/sociaal/arn'; // Do not change or remove
+
+
 }

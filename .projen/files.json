@@ -16,6 +16,7 @@
     ".projen/tasks.json",
     "cdk.json",
     "LICENSE",
+    "src/submission-processor/sociaal-receiver-lambda/sociaal-receiver-function.ts",
     "tsconfig.dev.json",
     "tsconfig.json"
   ],
