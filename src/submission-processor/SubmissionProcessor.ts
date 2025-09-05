@@ -86,7 +86,7 @@ export class SubmissionProcessor extends Construct {
   };
 
   /**
-   * Temporary queue until we can use the regular sociaal aanvragen route. 
+   * Temporary queue until we can use the regular sociaal aanvragen route.
    * This requires a zaakdms process in Suite, which cannot be made right now.
    * Goal to delete this within a year.
    */
