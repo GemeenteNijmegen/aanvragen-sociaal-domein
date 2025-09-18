@@ -1,5 +1,4 @@
 import { SQSClient, SendMessageCommand } from '@aws-sdk/client-sqs';
-import { EsbOutMessageSchema } from './sqsESBOutMessage';
 import { iitEsbSchema } from '../schema/IITESB';
 
 export async function sendIITToEsb(

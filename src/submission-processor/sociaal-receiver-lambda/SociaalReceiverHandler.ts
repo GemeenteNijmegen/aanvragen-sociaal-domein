@@ -30,7 +30,7 @@ export class SociaalReceiverHandler {
     if (input.enrichedObject.sociaalDomeinRegeling == 'IIT') {
       this.props.logger.debug('IIT inzending', input);
       const esbOut = await mapIITToEsbOut(input, this.props.logger);
-      this.props.logger.debug('Result mapToEsbOut', esbOut);
+      this.props.logger.debug('Result IIT mapper output', esbOut);
       await sendIITToEsb(this.props.sqs, this.props.esbIITQueueUrl, esbOut, { groupId, dedupId });
     } else {
     // ALO standaard

@@ -1,5 +1,5 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { Client, ClientSchema, EsbOutMessage, EsbOutMessageSchema } from './sqsESBOutMessage';
+import { ClientSchema, EsbOutMessage} from './sqsESBOutMessage';
 import { SqsSubmissionBody } from './sqsSubmissionBody';
 import { iitEsbSchema, iitPersoon } from '../schema/IITESB';
 
