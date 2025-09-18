@@ -24,6 +24,7 @@ async function initalize(): Promise<SociaalReceiverHandlerProps> {
   const sqs = new SQSClient({});
   return {
     esbQueueUrl: env.ESB_QUEUE_URL,
+    esbIITQueueUrl: env.ESB_IIT_QUEUE_URL,
     sqs,
     tracer,
     logger,
