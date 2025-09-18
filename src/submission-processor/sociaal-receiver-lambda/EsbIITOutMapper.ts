@@ -33,7 +33,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
         Voornamen: parsed.data.Voornamen ?? '',
         Achternaam: parsed.data.Achternaam ?? '',
         Geslacht: parsed.data.Geslacht ?? 'onbekend',
-        Geboortedatum: parsed.data.Geboortedatum ?? '01-01-1900',
+        Geboortedatum: isoToDmyOrDefault(parsed.data.Geboortedatum),
       },
       Adres: {
         Straat: parsed.data.Feitelijkadres?.Straatnaam ?? '',
@@ -47,7 +47,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
 
 
   const esbSqsBody = {
-    ...{submissionMainData},
+    ...{ submissionMainData },
     fileObjects: input.fileObjects,
     brpData: { Persoon: persoon },
   };
@@ -57,3 +57,10 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
   logger.debug('parsed', esbSqsBodyParsed);
   return esbSqsBodyParsed.success ? esbSqsBodyParsed.data : {};
 }
+
+export const isoToDmyOrDefault = (s: string): string => {
+  const DEFAULT_DMY = '01-01-1900';
+  // If it matches YYYY-MM-DD, flip to DD-MM-YYYY; else default.
+  const out = s.replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3-$2-$1');
+  return out === s ? DEFAULT_DMY : out;
+};
