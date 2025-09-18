@@ -7,6 +7,7 @@ import { iitEsbSchema, iitPersoon } from '../schema/IITESB';
 export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): Promise<EsbOutMessage> {
   const inputObject = input.enrichedObject;
   logger.debug('in mapToEsbOut enrichedObject', inputObject );
+  logger.debug('in mapIITToEsbOut fileObjects in input object', input );
   // Later opdelen in kleinere stukken in de mapper-collaborators
 
   const submissionMainData = {

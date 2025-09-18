@@ -4,7 +4,7 @@ const fileObjectSchema = z.object({
   bucket: z.string(),
   objectKey: z.string(),
   fileName: z.string(),
-  objectType: z.string(),
+  objectType: z.string().optional(),
 });
 
 const persoonsgegevensSchema = z.object({
