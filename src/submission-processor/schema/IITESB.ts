@@ -17,11 +17,11 @@ const persoonsgegevensSchema = z.object({
 });
 
 const adresSchema = z.object({
-  Straat: z.string(),
-  Huisnummer: z.string(),
-  Postcode: z.string(),
-  Woonplaats: z.string(),
-  Gemeente: z.string(),
+  Straat: z.string().optional(),
+  Huisnummer: z.string().optional(),
+  Postcode: z.string().optional(),
+  Woonplaats: z.string().optional(),
+  Gemeente: z.string().optional(),
 });
 
 export const persoonSchema = z.object({
