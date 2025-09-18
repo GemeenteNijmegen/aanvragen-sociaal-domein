@@ -51,7 +51,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
     fileObjects: input.fileObjects,
     brpData: { Persoon: persoon },
   };
-  logger.debug('esbSqsBody before parse', esbSqsBody);
+  logger.debug('esbSqsBody before parse:', {esbSqsBody});
   // Snelle validatie, hoewel nog looseObject is
   const esbSqsBodyParsed = iitEsbSchema.safeParse(esbSqsBody);
   logger.debug('parsed', esbSqsBodyParsed);
