@@ -31,7 +31,7 @@ export const persoonSchema = z.object({
 
 export const iitEsbSchema = z.object({
   bsn: z.string(),
-  kvknummer: z.string(),
+  kvknummer: z.string().optional(),
   reference: z.string(),
   inlogmiddel: z.string(),
   fileObjects: z.array(fileObjectSchema),
