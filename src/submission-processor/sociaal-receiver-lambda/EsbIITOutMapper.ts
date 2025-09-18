@@ -47,7 +47,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
 
 
   const esbSqsBody = {
-    submissionMainData,
+    ...{submissionMainData},
     fileObjects: input.fileObjects,
     brpData: { Persoon: persoon },
   };
