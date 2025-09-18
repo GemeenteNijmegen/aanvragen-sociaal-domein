@@ -37,7 +37,7 @@ export const iitEsbSchema = z.object({
   inlogmiddel: z.string(),
   fileObjects: z.array(fileObjectSchema),
   brpData: z.object({
-    persoon: persoonSchema,
+    Persoon: persoonSchema,
   }),
 });
 
