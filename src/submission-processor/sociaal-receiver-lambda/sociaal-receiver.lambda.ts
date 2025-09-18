@@ -20,7 +20,7 @@ tracer.addServiceNameAnnotation();
 const logger = new Logger({ serviceName: 'sociaal-receiver' });
 
 async function initalize(): Promise<SociaalReceiverHandlerProps> {
-  const env = environmentVariables(['ESB_QUEUE_URL']);
+  const env = environmentVariables(['ESB_QUEUE_URL', 'ESB_IIT_QUEUE_URL']);
   const sqs = new SQSClient({});
   return {
     esbQueueUrl: env.ESB_QUEUE_URL,
