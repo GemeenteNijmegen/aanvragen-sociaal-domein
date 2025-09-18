@@ -36,10 +36,10 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
         Geboortedatum: parsed.data.Geboortedatum ?? '01-01-1900',
       },
       Adres: {
-        Straat: parsed.data.Correspondentieadres?.Straatnaam ?? '',
-        Huisnummer: parsed.data.Correspondentieadres?.Huisnummer ?? '',
-        Postcode: parsed.data.Correspondentieadres?.Postcode ?? '',
-        Woonplaats: parsed.data.Correspondentieadres?.Woonplaatsnaam ?? '',
+        Straat: parsed.data.Feitelijkadres?.Straatnaam ?? '',
+        Huisnummer: parsed.data.Feitelijkadres?.Huisnummer ?? '',
+        Postcode: parsed.data.Feitelijkadres?.Postcode ?? '',
+        Woonplaats: parsed.data.Feitelijkadres?.Woonplaatsnaam ?? '',
       },
     } as iitPersoon;
     return brpDataPersoon;
