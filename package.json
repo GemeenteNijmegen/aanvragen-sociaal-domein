@@ -51,14 +51,14 @@
     "jest": "^30.1.3",
     "jest-junit": "^16",
     "projen": "^0.95.6",
-    "ts-jest": "^29.4.3",
+    "ts-jest": "^29.4.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.26.1",
     "@aws-lambda-powertools/tracer": "^2.26.1",
-    "@aws-sdk/client-sqs": "^3.891.0",
+    "@aws-sdk/client-sqs": "^3.893.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.42",
     "@gemeentenijmegen/utils": "^0.0.36",
     "aws-cdk-lib": "^2.1.0",
