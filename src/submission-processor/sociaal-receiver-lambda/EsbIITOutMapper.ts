@@ -33,7 +33,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
         Voornamen: parsed.data.Voornamen ?? '',
         Achternaam: parsed.data.Achternaam ?? '',
         Geslachtsnaam: parsed.data.Achternaam ?? '',
-        Geslacht: parsed.data.Geslacht.toUpperCase() ?? 'onbekend',
+        Geslacht: parsed.data.Geslacht.toUpperCase() ?? '',
         Geboortedatum: isoToDmyOrDefault(parsed.data.Geboortedatum),
       },
       Adres: {
