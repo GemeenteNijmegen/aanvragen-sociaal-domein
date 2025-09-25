@@ -27,13 +27,17 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
     logger.debug('Parse Client', parsed);
     if (!parsed.success) return undefined;
 
+    let geslacht = '';
+    if(parsed.data.Geslacht.toLowerCase() == "man"){ geslacht = "M"}
+    if(parsed.data.Geslacht.toLowerCase() == "vrouw"){ geslacht = "V"}
+
     const brpDataPersoon = {
       Persoonsgegevens: {
         Voorletters: parsed.data.Voorletters ?? '',
         Voornamen: parsed.data.Voornamen ?? '',
         Achternaam: parsed.data.Achternaam ?? '',
         Geslachtsnaam: parsed.data.Achternaam ?? '',
-        Geslacht: parsed.data.Geslacht.toUpperCase() ?? '',
+        Geslacht: geslacht ?? '',
         Geboortedatum: isoToDmyOrDefault(parsed.data.Geboortedatum),
       },
       Adres: {
