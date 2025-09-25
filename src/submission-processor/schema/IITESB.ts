@@ -12,6 +12,7 @@ const persoonsgegevensSchema = z.object({
   Voorletters: z.string().optional(),
   Voorvoegsel: z.string().optional(),
   Achternaam: z.string(),
+  Geslachtsnaam: z.string(),
   Geslacht: z.string(),
   Geboortedatum: z.string(),
 });

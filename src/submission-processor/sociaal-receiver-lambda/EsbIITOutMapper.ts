@@ -1,5 +1,5 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { ClientSchema, EsbOutMessage} from './sqsESBOutMessage';
+import { ClientSchema, EsbOutMessage } from './sqsESBOutMessage';
 import { SqsSubmissionBody } from './sqsSubmissionBody';
 import { iitEsbSchema, iitPersoon } from '../schema/IITESB';
 
@@ -32,7 +32,8 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
         Voorletters: parsed.data.Voorletters ?? '',
         Voornamen: parsed.data.Voornamen ?? '',
         Achternaam: parsed.data.Achternaam ?? '',
-        Geslacht: parsed.data.Geslacht ?? 'onbekend',
+        Geslachtsnaam: parsed.data.Achternaam ?? '',
+        Geslacht: parsed.data.Geslacht.toUpperCase() ?? 'onbekend',
         Geboortedatum: isoToDmyOrDefault(parsed.data.Geboortedatum),
       },
       Adres: {
@@ -40,6 +41,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
         Huisnummer: parsed.data.Feitelijkadres?.Huisnummer ?? '',
         Postcode: parsed.data.Feitelijkadres?.Postcode ?? '',
         Woonplaats: parsed.data.Feitelijkadres?.Woonplaatsnaam ?? '',
+        Gemeente: parsed.data.Feitelijkadres?.Woonplaatsnaam ?? '',
       },
     } as iitPersoon;
     return brpDataPersoon;
@@ -51,7 +53,7 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
     fileObjects: input.fileObjects,
     brpData: { Persoon: persoon },
   };
-  logger.debug('esbSqsBody before parse:', {esbSqsBody});
+  logger.debug('esbSqsBody before parse:', { esbSqsBody });
   // Snelle validatie, hoewel nog looseObject is
   const esbSqsBodyParsed = iitEsbSchema.safeParse(esbSqsBody);
   logger.debug('parsed', esbSqsBodyParsed);
