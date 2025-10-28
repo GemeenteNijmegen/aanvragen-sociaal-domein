@@ -28,8 +28,8 @@ export async function mapIITToEsbOut(input: SqsSubmissionBody, logger: Logger): 
     if (!parsed.success) return undefined;
 
     let geslacht = '';
-    if(parsed.data.Geslacht.toLowerCase() == "man"){ geslacht = "M"}
-    if(parsed.data.Geslacht.toLowerCase() == "vrouw"){ geslacht = "V"}
+    if (parsed.data.Geslacht.toLowerCase() == 'man') { geslacht = 'M';}
+    if (parsed.data.Geslacht.toLowerCase() == 'vrouw') { geslacht = 'V';}
 
     const brpDataPersoon = {
       Persoonsgegevens: {

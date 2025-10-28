@@ -43,10 +43,10 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
   const werkprocesIntake = client
     ? {
       Webintake: {
-        Berichtsoort: { WMO: { Onderwerp: '03', Categorie: '04' } }, // ecode voorbeeld, nog flexibeler maken en checken
-        AardVerzoek: 'BT',
+        Berichtsoort: { WWB: { Onderwerp: '01', Categorie: '01' } }, // ecode voorbeeld, nog flexibeler maken en checken
+        AardVerzoek: 'RT', // Regulier Traject
         Aanvraagdatum: inputObject.datumAanvraag ? inputObject.datumAanvraag.replaceAll('-', '') : '20250101', //YYYYMMDD betere functie maken en anders huidige datum ophalen
-        ZaakIdentificatie: submissionData.zaaknummer, //OF-
+        ZaakIdentificatie: submissionData.zaaknummer, //OF-0
         Toelichting: `Form: ${inputObject.formName}`, // Max. tekens
         Client: client,
       },
