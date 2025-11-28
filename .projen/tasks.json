@@ -56,7 +56,7 @@
       "description": "Create a JavaScript bundle from src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node22\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
+          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
         }
       ]
     },
@@ -65,7 +65,7 @@
       "description": "Continuously update the JavaScript bundle from src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts",
       "steps": [
         {
-          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node22\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
+          "exec": "esbuild --bundle src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },

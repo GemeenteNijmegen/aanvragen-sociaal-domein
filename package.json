@@ -33,7 +33,7 @@
     "@aws-lambda-powertools/batch": "^2.29.0",
     "@aws-lambda-powertools/idempotency": "^2.29.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.45",
-    "@gemeentenijmegen/projen-project-type": "^1.11.8",
+    "@gemeentenijmegen/projen-project-type": "^1.11.10",
     "@middy/core": "5.5.1",
     "@stylistic/eslint-plugin": "^2",
     "@types/aws-lambda": "^8.10.159",
