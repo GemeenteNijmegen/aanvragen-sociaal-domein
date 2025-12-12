@@ -15,6 +15,10 @@ export const SqsSubmissionBodySchema = z.looseObject({
     bsn: z.string().optional(),
     kvk: z.string().optional(),
     formName: z.string(),
+    networkShare: z.string().optional(),
+    monitoringNetworkShare: z.string().optional().nullable(),
+    internalNotificationEmails: z.array(z.string()).optional().nullable(),
+    bsnOrKvkToFile: z.boolean().optional().nullable(),
   }),
   filePaths: z.array(z.string()),
   fileObjects: z.array(
