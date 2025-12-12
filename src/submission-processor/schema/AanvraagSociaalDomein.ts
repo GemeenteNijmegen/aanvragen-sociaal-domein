@@ -33,7 +33,7 @@ const PartnerSchema = z.object({
   Nationaliteit: NationaliteitSchema.optional(),
   Iban: z.string().optional(),
   Telefoonnr: TelefoonSchema.optional(),
-  EMailAdresClient: z.string().email().optional(),
+  EMailAdresClient: z.string().optional(),
 });
 
 const RelatieSchema = z.object({
@@ -58,11 +58,11 @@ const ClientSchema = z.object({
   Nationaliteit: NationaliteitSchema.optional(),
   Iban: z.string().optional(),
   Telefoonnr: TelefoonSchema.optional(),
-  EMailAdresClient: z.string().email().optional(),
+  EMailAdresClient: z.string().optional(),
   relatie: RelatieSchema.optional(),
 });
 
-export const AanvraagSociaalDomeinSchema = z.object({
+export const AanvraagSociaalDomeinSchema = z.looseObject({
   sociaalDomeinRegeling: z.string(),
   zaaktypeIdentificatie: z.string(),
   aardVerzoek: z.string().optional(),
@@ -89,6 +89,6 @@ export const AanvraagSociaalDomeinSchema = z.object({
     bewindvoering: z.boolean().optional(),
   }).optional(),
   client: ClientSchema.optional(),
-}).passthrough();
+});
 
 export type AanvraagSociaalDomein = z.infer<typeof AanvraagSociaalDomeinSchema>;

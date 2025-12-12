@@ -39,7 +39,7 @@ export const iitEsbSchema = z.object({
   fileObjects: z.array(fileObjectSchema),
   brpData: z.object({
     Persoon: persoonSchema,
-  }),
+  }).optional(),
 });
 
 export type iitEsb = z.infer<typeof iitEsbSchema>;

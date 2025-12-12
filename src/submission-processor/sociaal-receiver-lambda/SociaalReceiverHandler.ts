@@ -2,10 +2,10 @@ import { Logger } from '@aws-lambda-powertools/logger';
 import { Tracer } from '@aws-lambda-powertools/tracer';
 import type { SQSClient } from '@aws-sdk/client-sqs';
 import type { SQSRecord } from 'aws-lambda';
-import { mapIITToEsbOut } from './EsbIITOutMapper';
-import { sendIITToEsb } from './EsbIITSender';
 import { mapToEsbOut } from './EsbOutMapper';
 import { sendToEsb } from './EsbSender';
+import { mapIITToEsbOut } from './IIT/EsbIITOutMapper';
+import { sendIITToEsb } from './IIT/EsbIITSender';
 import { SqsSubmissionBodySchema } from './sqsSubmissionBody';
 
 
@@ -29,7 +29,7 @@ export class SociaalReceiverHandler {
 
     if (input.enrichedObject.sociaalDomeinRegeling == 'IIT') {
       this.props.logger.debug('IIT inzending', input);
-      const esbOut = await mapIITToEsbOut(input, this.props.logger);
+      const esbOut = mapIITToEsbOut(input, this.props.logger);
       this.props.logger.debug('Result IIT mapper output', esbOut);
       await sendIITToEsb(this.props.sqs, this.props.esbIITQueueUrl, esbOut, { groupId, dedupId });
     } else {
