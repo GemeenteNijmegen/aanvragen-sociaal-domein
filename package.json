@@ -30,8 +30,8 @@
     "projen": "npx projen"
   },
   "devDependencies": {
-    "@aws-lambda-powertools/batch": "^2.29.0",
-    "@aws-lambda-powertools/idempotency": "^2.29.0",
+    "@aws-lambda-powertools/batch": "^2.30.0",
+    "@aws-lambda-powertools/idempotency": "^2.30.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.46",
     "@gemeentenijmegen/projen-project-type": "^1.11.10",
     "@middy/core": "5.5.1",
@@ -56,8 +56,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.29.0",
-    "@aws-lambda-powertools/tracer": "^2.29.0",
+    "@aws-lambda-powertools/logger": "^2.30.0",
+    "@aws-lambda-powertools/tracer": "^2.30.0",
     "@aws-sdk/client-sqs": "^3.948.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.46",
     "@gemeentenijmegen/utils": "^0.0.38",
