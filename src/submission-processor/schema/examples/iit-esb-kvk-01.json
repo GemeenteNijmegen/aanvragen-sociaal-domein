@@ -1,0 +1,20 @@
+{
+  "bsn": "123456789",
+  "kvknummer": "123247887",
+  "reference": "OF-123KVK",
+  "inlogmiddel": "eherkenning",
+  "fileObjects": [
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-123ABC/overzicht_aanvraag.pdf",
+      "fileName": "overzicht-aanvraag.pdf",
+      "objectType": "submission"
+    },
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-123ABC/overzicht_aanvraag.pdf",
+      "fileName": "overzicht-aanvraag.pdf",
+      "objectType": "attachment"
+    }
+  ]
+}

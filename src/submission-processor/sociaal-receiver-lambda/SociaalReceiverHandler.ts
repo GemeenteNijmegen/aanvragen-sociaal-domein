@@ -4,11 +4,14 @@ import type { SQSClient } from '@aws-sdk/client-sqs';
 import type { SQSRecord } from 'aws-lambda';
 import { mapToEsbOut } from './EsbOutMapper';
 import { sendToEsb } from './EsbSender';
+import { mapIITToEsbOut } from './IIT/EsbIITOutMapper';
+import { sendIITToEsb } from './IIT/EsbIITSender';
 import { SqsSubmissionBodySchema } from './sqsSubmissionBody';
 
 
 export interface SociaalReceiverHandlerProps {
   esbQueueUrl: string;
+  esbIITQueueUrl: string;
   sqs: SQSClient;
   tracer?: Tracer;
   logger: Logger;
@@ -23,15 +26,28 @@ export class SociaalReceiverHandler {
 
     const groupId = input.enrichedObject.zaaktypeIdentificatie ?? 'sociaal';
     const dedupId = input.enrichedObject.reference ?? input.enrichedObject.objectUUID;
-    this.props.logger.debug('Start mapToEsbOut');
-    const esbOut = await mapToEsbOut(input, this.props.logger);
-    this.props.logger.debug('Result mapToEsbOut', esbOut);
-    await sendToEsb(this.props.sqs, this.props.esbQueueUrl, esbOut, { groupId, dedupId });
 
-    this.props.logger.debug('Forwarded to ESB', {
-      messageId: record.messageId,
-      groupId,
-      dedupId,
-    });
+    if (input.enrichedObject.sociaalDomeinRegeling == 'IIT') {
+      this.props.logger.debug('IIT inzending', input);
+      const esbOut = mapIITToEsbOut(input, this.props.logger);
+      this.props.logger.debug('Result IIT mapper output', esbOut);
+      await sendIITToEsb(this.props.sqs, this.props.esbIITQueueUrl, esbOut, { groupId, dedupId });
+    } else {
+    // ALO standaard
+    // Gaat naar aparte lambda's
+      this.props.logger.debug('Start mapToEsbOut voor ALO');
+      const esbOut = await mapToEsbOut(input, this.props.logger);
+      this.props.logger.debug('Result mapToEsbOut', esbOut);
+      await sendToEsb(this.props.sqs, this.props.esbQueueUrl, esbOut, { groupId, dedupId });
+
+      this.props.logger.debug('Forwarded to ESB', {
+        messageId: record.messageId,
+        groupId,
+        dedupId,
+      });
+    //ALO standaard einde
+    }
+
+
   }
 }

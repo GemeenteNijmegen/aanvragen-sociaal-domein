@@ -1,0 +1,44 @@
+{
+  "bsn": "900026236",
+  "reference": "OF-123ABC",
+  "inlogmiddel": "digid",
+  "fileObjects": [
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-123ABC/overzicht_aanvraag.pdf",
+      "fileName": "overzicht-aanvraag.pdf",
+      "objectType": "submission"
+    },
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-123ABC/bijlage_aanvraag.pdf",
+      "fileName": "bijlage-aanvraag.pdf",
+      "objectType": "attachment"
+    }
+  ],
+
+  "brpData": {
+    "Persoon": {
+      "Persoonsgegevens": {
+        "Voorletters": "H.",
+        "Voornamen": "Hans",
+        "Voorvoegsel": "de",
+        "Geslachtsnaam": "Jong",
+        "Achternaam": "de Jong",
+        "Naam": "H. de Jong",
+        "Geboortedatum": "01-01-1956",
+        "Geslacht": "M",
+        "NederlandseNationaliteit": "Ja",
+        "Geboorteplaats": "Nijmegen",
+        "Geboorteland": "Nederland"
+      },
+      "Adres": {
+        "Straat": "Kelfkensbos",
+        "Huisnummer": "80-A-1",
+        "Gemeente": "Nijmegen",
+        "Postcode": "6511 RN",
+        "Woonplaats": "Nijmegen"
+      }
+    }
+  }
+}
