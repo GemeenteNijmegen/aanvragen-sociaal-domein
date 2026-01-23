@@ -58,12 +58,12 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.30.2",
     "@aws-lambda-powertools/tracer": "^2.30.2",
-    "@aws-sdk/client-sqs": "^3.972.0",
+    "@aws-sdk/client-sqs": "^3.974.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.47",
     "@gemeentenijmegen/utils": "^0.0.38",
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5",
-    "zod": "^4.3.5"
+    "zod": "^4.3.6"
   },
   "license": "EUPL-1.2",
   "publishConfig": {
