@@ -58,7 +58,7 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.30.2",
     "@aws-lambda-powertools/tracer": "^2.30.2",
-    "@aws-sdk/client-sqs": "^3.974.0",
+    "@aws-sdk/client-sqs": "^3.975.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.47",
     "@gemeentenijmegen/utils": "^0.0.38",
     "aws-cdk-lib": "^2.1.0",
