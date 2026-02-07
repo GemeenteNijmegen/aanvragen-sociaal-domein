@@ -32,7 +32,7 @@
   "devDependencies": {
     "@aws-lambda-powertools/batch": "^2.30.2",
     "@aws-lambda-powertools/idempotency": "^2.30.2",
-    "@gemeentenijmegen/aws-constructs": "^0.0.47",
+    "@gemeentenijmegen/aws-constructs": "^0.0.48",
     "@gemeentenijmegen/projen-project-type": "^1.12.1",
     "@middy/core": "5.5.1",
     "@stylistic/eslint-plugin": "^2",
@@ -58,8 +58,8 @@
   "dependencies": {
     "@aws-lambda-powertools/logger": "^2.30.2",
     "@aws-lambda-powertools/tracer": "^2.30.2",
-    "@aws-sdk/client-sqs": "^3.984.0",
-    "@gemeentenijmegen/aws-constructs": "^0.0.47",
+    "@aws-sdk/client-sqs": "^3.985.0",
+    "@gemeentenijmegen/aws-constructs": "^0.0.48",
     "@gemeentenijmegen/utils": "^0.0.38",
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.0.5",
