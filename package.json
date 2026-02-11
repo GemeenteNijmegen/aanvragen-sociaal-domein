@@ -30,15 +30,15 @@
     "projen": "npx projen"
   },
   "devDependencies": {
-    "@aws-lambda-powertools/batch": "^2.30.2",
-    "@aws-lambda-powertools/idempotency": "^2.30.2",
+    "@aws-lambda-powertools/batch": "^2.31.0",
+    "@aws-lambda-powertools/idempotency": "^2.31.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.48",
     "@gemeentenijmegen/projen-project-type": "^1.12.1",
     "@middy/core": "5.5.1",
     "@stylistic/eslint-plugin": "^2",
     "@types/aws-lambda": "^8.10.160",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.10.12",
+    "@types/node": "^24.10.13",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2",
@@ -56,9 +56,9 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.30.2",
-    "@aws-lambda-powertools/tracer": "^2.30.2",
-    "@aws-sdk/client-sqs": "^3.986.0",
+    "@aws-lambda-powertools/logger": "^2.31.0",
+    "@aws-lambda-powertools/tracer": "^2.31.0",
+    "@aws-sdk/client-sqs": "^3.987.0",
     "@gemeentenijmegen/aws-constructs": "^0.0.48",
     "@gemeentenijmegen/utils": "^0.0.38",
     "aws-cdk-lib": "^2.1.0",
