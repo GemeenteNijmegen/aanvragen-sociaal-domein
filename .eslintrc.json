@@ -153,6 +153,7 @@
         "devDependencies": [
           "**/test/**",
           "**/build-tools/**",
+          "src/prefill/prefill.lambda.ts",
           "src/submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda.ts",
           ".projenrc.ts",
           "projenrc/**/*.ts"

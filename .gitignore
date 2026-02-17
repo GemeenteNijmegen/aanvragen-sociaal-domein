@@ -59,6 +59,7 @@ junit.xml
 /cdk.out/
 .cdk.staging/
 .parcel-cache/
+!/src/prefill/prefill-function.ts
 !/src/submission-processor/sociaal-receiver-lambda/sociaal-receiver-function.ts
 !/.github/workflows/emergency.yml
 !/.github/workflows/auto-merge.yml

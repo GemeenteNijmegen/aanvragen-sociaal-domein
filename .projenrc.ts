@@ -4,9 +4,11 @@ const project = new GemeenteNijmegenCdkApp({
   defaultReleaseBranch: 'main',
   deps: [
     '@gemeentenijmegen/utils',
+    '@gemeentenijmegen/apiclient',
     '@aws-sdk/client-sqs',
     '@aws-lambda-powertools/logger',
     '@aws-lambda-powertools/tracer',
+    'axios',
     'zod',
   ],
   devDeps: [
