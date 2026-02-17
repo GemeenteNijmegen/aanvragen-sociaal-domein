@@ -117,6 +117,10 @@
       "type": "runtime"
     },
     {
+      "name": "@gemeentenijmegen/apiclient",
+      "type": "runtime"
+    },
+    {
       "name": "@gemeentenijmegen/aws-constructs",
       "type": "runtime"
     },
@@ -127,6 +131,10 @@
     {
       "name": "aws-cdk-lib",
       "version": "^2.1.0",
+      "type": "runtime"
+    },
+    {
+      "name": "axios",
       "type": "runtime"
     },
     {
