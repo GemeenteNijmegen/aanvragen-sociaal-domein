@@ -47,28 +47,7 @@
       "description": "Prepare assets",
       "steps": [
         {
-          "spawn": "bundle:prefill/prefill.lambda"
-        },
-        {
           "spawn": "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda"
-        }
-      ]
-    },
-    "bundle:prefill/prefill.lambda": {
-      "name": "bundle:prefill/prefill.lambda",
-      "description": "Create a JavaScript bundle from src/prefill/prefill.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/prefill/prefill.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/prefill/prefill.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/*"
-        }
-      ]
-    },
-    "bundle:prefill/prefill.lambda:watch": {
-      "name": "bundle:prefill/prefill.lambda:watch",
-      "description": "Continuously update the JavaScript bundle from src/prefill/prefill.lambda.ts",
-      "steps": [
-        {
-          "exec": "esbuild --bundle src/prefill/prefill.lambda.ts --target=\"node24\" --platform=\"node\" --outfile=\"assets/prefill/prefill.lambda/index.js\" --tsconfig=\"tsconfig.dev.json\" --external:@aws-sdk/* --watch"
         }
       ]
     },
@@ -335,13 +314,13 @@
       },
       "steps": [
         {
-          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-lambda-powertools/batch,@aws-lambda-powertools/idempotency,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@middy/core,@types/aws-lambda,@types/jest,@types/node,dotenv,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-lambda-powertools/tracer,@aws-sdk/client-sqs,@gemeentenijmegen/apiclient,@gemeentenijmegen/utils,axios,zod"
+          "exec": "npx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@aws-lambda-powertools/batch,@aws-lambda-powertools/idempotency,@gemeentenijmegen/aws-constructs,@gemeentenijmegen/projen-project-type,@middy/core,@types/aws-lambda,@types/jest,@types/node,dotenv,esbuild,eslint-import-resolver-typescript,eslint-plugin-import,jest,ts-jest,ts-node,typescript,@aws-lambda-powertools/logger,@aws-lambda-powertools/tracer,@aws-sdk/client-sqs,@gemeentenijmegen/utils,zod"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @aws-lambda-powertools/batch @aws-lambda-powertools/idempotency @gemeentenijmegen/aws-constructs @gemeentenijmegen/projen-project-type @middy/core @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version dotenv esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-lambda-powertools/logger @aws-lambda-powertools/tracer @aws-sdk/client-sqs @gemeentenijmegen/apiclient @gemeentenijmegen/utils aws-cdk-lib axios constructs zod"
+          "exec": "yarn upgrade @aws-lambda-powertools/batch @aws-lambda-powertools/idempotency @gemeentenijmegen/aws-constructs @gemeentenijmegen/projen-project-type @middy/core @stylistic/eslint-plugin @types/aws-lambda @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk commit-and-tag-version dotenv esbuild eslint-import-resolver-typescript eslint-plugin-import eslint jest jest-junit projen ts-jest ts-node typescript @aws-lambda-powertools/logger @aws-lambda-powertools/tracer @aws-sdk/client-sqs @gemeentenijmegen/utils aws-cdk-lib constructs zod"
         },
         {
           "exec": "npx projen"
