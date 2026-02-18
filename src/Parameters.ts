@@ -36,11 +36,5 @@ export class ParameterStack extends Stack {
       parameterName: Statics.ssmDummyParameter,
     });
 
-    new StringParameter(this, 'prefill-iit-avi', {
-      stringValue: 'https://data-test.nijmegen.nl/eapi/nijmegen/webform/iit/mule', // Default value
-      parameterName: Statics.ssmName_individueleInkomensToeslagAviPrefillEndpoint,
-      description: 'ESB endpoint for prefill Individuele InkomensToeslag (IIT) and ambtshalve verstrekking IIT (AVI)',
-    });
-
   }
 }

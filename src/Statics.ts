@@ -52,7 +52,4 @@ export class Statics {
    */
   static readonly ssmSharedSubmissionEsbRoleArn = '/shared/submission/esbrole/arn'; // Do not change or remove
   static readonly ssmSharedSubmissionSQSSociaalArn = '/shared/submission/sqs/sociaal/arn'; // Do not change or remove
-
-  // Statics for prefill api
-  static readonly ssmName_individueleInkomensToeslagAviPrefillEndpoint = '/api/prefill-iit-avi-endpoint';
 }

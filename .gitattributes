@@ -21,7 +21,6 @@
 /cdk.json linguist-generated
 /LICENSE linguist-generated
 /package.json linguist-generated
-/src/prefill/prefill-function.ts linguist-generated
 /src/submission-processor/sociaal-receiver-lambda/sociaal-receiver-function.ts linguist-generated
 /tsconfig.dev.json linguist-generated
 /tsconfig.json linguist-generated
