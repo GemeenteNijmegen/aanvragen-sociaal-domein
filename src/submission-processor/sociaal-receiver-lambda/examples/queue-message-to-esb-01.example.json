@@ -1,34 +1,65 @@
 {
   "submissionData": {
-    "zaaknummer": "Z-087623487-8324",
+    "zaaknummer": "OF-7623DV",
     "formReference": "OF-7623DV",
     "formName": "aanvraag-levensonderhoud"
   },
   "zaakDMS": {
-    "zaaknummer": "Z-087623487-8324",
+    "zaaknummer": "OF-7623DV",
     "zaaktype": "ALO-ZAAKTYPE",
+    "zaaktypecode": "B0901",
     "fileObjects": [
       {
-        "bucket": "mybucket",
-        "objectKey": "TDL123.01/TDL123.01.pdf",
-        "fileName": "TDL123.01.pdf"
-      },
-      {
-        "bucket": "mybucket",
-        "objectKey": "TDL123.01/attachments/test.png",
-        "fileName": "attachments/test.png"
+        "bucket": "bucketnaam",
+        "objectKey": "OF-7623DV/OF-7623DV.pdf",
+        "fileName": "OF-7623DV.pdf",
+        "objectType": "submission"
       }
-    ]
+    ],
+    "create": {
+      "zender": {
+        "applicatie": "AWS"
+      },
+      "ontvanger": {
+        "applicatie": "ZDS"
+      },
+      "metadata": {
+        "zaaktypecode": "B0901"
+      },
+      "object": {
+        "referenceId": "OF-7623DV",
+        "bevoegdgezag": "Gemeente Nijmegen",
+        "omschrijving": "Formulieraanvraag OF-7623DV",
+        "status": "Onbekend",
+        "startdatum": "2026-02-20",
+        "initiator": {
+          "natuurlijkPersoon": {
+            "inp.bsn": "123456789",
+            "geslachtsnaam": "Vries",
+            "voorvoegselGeslachtsnaam": "de",
+            "voorletters": "J"
+          }
+        },
+        "belanghebbende": {
+          "natuurlijkPersoon": {
+            "inp.bsn": "123456789",
+            "geslachtsnaam": "Vries",
+            "voorvoegselGeslachtsnaam": "de",
+            "voorletters": "J"
+          }
+        }
+      }
+    }
   },
   "werkprocesIntake": {
     "Webintake": {
       "Berichtsoort": {
         "VRIJ": {
-          "Onderwerp": "Aanvraag ALO",
-          "Categorie": "Participatiewet"
+          "Onderwerp": "50",
+          "Categorie": "50"
         }
       },
-      "Aanvraagdatum": "2025-06-15T10:30:00Z",
+      "Aanvraagdatum": "20260220",
       "ZaakIdentificatie": "Z-087623487-8324",
       "Toelichting": "Testaanvraag vanuit systeem",
       "Client": {

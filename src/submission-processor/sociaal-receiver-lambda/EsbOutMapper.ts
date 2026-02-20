@@ -1,5 +1,5 @@
 import { Logger } from '@aws-lambda-powertools/logger';
-import { Client, ClientSchema, EsbOutMessage, EsbOutMessageSchema } from './sqsESBOutMessage';
+import { Client, ClientSchema, EsbOutMessage, EsbOutMessageSchema, ZaakDmsRol } from './sqsESBOutMessage';
 import { SqsSubmissionBody } from './sqsSubmissionBody';
 
 // Naar class met aparte mapper en error handling
@@ -12,12 +12,6 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
     zaaknummer: inputObject.reference,
     formReference: inputObject.reference,
     formName: inputObject.formName,
-  };
-
-  const zaakDMS = {
-    zaaknummer: submissionData.zaaknummer,
-    zaaktype: inputObject.zaaktypeIdentificatie,
-    fileObjects: input.fileObjects,
   };
 
 
@@ -52,6 +46,46 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
       },
     }
     : undefined;
+
+
+  // Zaakdms
+  const extractRol = (clientData: Client | undefined): ZaakDmsRol | undefined => {
+    if (!clientData) return undefined;
+
+    return {
+      natuurlijkPersoon: {
+        'inp.bsn': clientData.BurgerServiceNr,
+        'geslachtsnaam': clientData.Achternaam,
+        'voorvoegselGeslachtsnaam': clientData.Voorvoegsel || '',
+        'voorletters': clientData.Voornamen?.[0] || 'O', // eerste letter of 'O'nbekend
+      },
+    };
+  };
+
+  // In zaakDMS:
+  const create = client ? {
+    zender: { applicatie: 'AWS' },
+    ontvanger: { applicatie: 'ZDS' },
+    metadata: { zaaktypecode: 'B0901' }, // hardcoded
+    object: {
+      referenceId: submissionData.zaaknummer,
+      bevoegdgezag: 'Gemeente Nijmegen',
+      omschrijving: `Formulieraanvraag ${submissionData.zaaknummer}`,
+      status: 'Onbekend',
+      startdatum: new Date().toISOString().split('T')[0],
+      initiator: extractRol(client),
+      belanghebbende: extractRol(client),
+    },
+  } : undefined;
+
+  const zaakDMS = {
+    zaaknummer: submissionData.zaaknummer,
+    zaaktype: inputObject.zaaktypeIdentificatie,
+    zaaktypecode: 'B0901',
+    fileObjects: input.fileObjects,
+    ...(create ? { create } : {}),
+  };
+
 
   const esbSqsBody = {
     submissionData,
