@@ -1,11 +1,47 @@
 import { z } from 'zod';
 
+
 export const FileObjectSchema = z.looseObject({
   bucket: z.string(),
   objectKey: z.string(),
   fileName: z.string(),
+  objectType: z.string().optional(),
 });
 export type FileObject = z.infer<typeof FileObjectSchema>;
+
+export const ZaakDmsNatuurlijkPersoonSchema = z.looseObject({
+  'inp.bsn': z.string().optional(),
+  'geslachtsnaam': z.string().optional(),
+  'voorvoegselGeslachtsnaam': z.string().optional(),
+  'voorletters': z.string().optional(),
+});
+export type ZaakDmsNatuurlijkPersoon = z.infer<
+  typeof ZaakDmsNatuurlijkPersoonSchema
+>;
+
+export const ZaakDmsRolSchema = z.looseObject({
+  natuurlijkPersoon: ZaakDmsNatuurlijkPersoonSchema.optional(),
+});
+export type ZaakDmsRol = z.infer<typeof ZaakDmsRolSchema>;
+
+export const ZaakDmsCreateSchema = z.looseObject({
+  zender: z.looseObject({ applicatie: z.string().optional() }).optional(),
+  ontvanger: z.looseObject({ applicatie: z.string().optional() }).optional(),
+  metadata: z.looseObject({ zaaktypecode: z.string().optional() }).optional(),
+  object: z
+    .looseObject({
+      referenceId: z.string().optional(),
+      bevoegdgezag: z.string().optional(),
+      omschrijving: z.string().optional(),
+      status: z.string().optional(),
+      startdatum: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(), //"YYYY-MM-DD" string
+      initiator: ZaakDmsRolSchema.nullish(), // optional + nullable
+      belanghebbende: ZaakDmsRolSchema.nullish(),
+    })
+    .optional(),
+});
+
+export type ZaakDmsCreate = z.infer<typeof ZaakDmsCreateSchema>;
 
 export const AddressSchema = z.looseObject({
   Straatnaam: z.string().optional(),
@@ -109,7 +145,9 @@ export const EsbOutMessageSchema = z.looseObject({
   zaakDMS: z.looseObject({
     zaaknummer: z.string().optional(),
     zaaktype: z.string().optional(),
+    zaaktypecode: z.string().optional(),
     fileObjects: z.array(FileObjectSchema).optional(),
+    create: ZaakDmsCreateSchema.optional(),
   }).optional(),
 
   werkprocesIntake: z.looseObject({

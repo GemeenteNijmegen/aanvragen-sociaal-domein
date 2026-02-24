@@ -1,0 +1,70 @@
+{
+  "enrichedObject": {
+    "pdf": "https://mijn-services.accp.nijmegen.nl/open-zaak/documenten/api/v1/enkelvoudiginformatieobjecten/09c6695d-bf65-4493-8992-92280ffeb563",
+    "attachments": [
+      "https://mijn-services.accp.nijmegen.nl/open-zaak/documenten/api/v1/enkelvoudiginformatieobjecten/02f809a2-7796-4c5a-b1c4-dfb4b63a5844"
+    ],
+    "reference": "OF-7623DV",
+    "objectUrl": "https://mijn-services.accp.nijmegen.nl/objects/api/v2/objects/f223a5a1-20bb-4775-b8ba-1b22162bebfa",
+    "objectUUID": "f223a5a1-20bb-4775-b8ba-1b22162bebfa",
+    "sociaalDomeinRegeling": "BIJSTAND",
+    "zaaktypeIdentificatie": "ALO-ZAAKTYPE",
+    "datumAanvraag": "2026-02-20",
+    "bsn": "123456789",
+    "formName": "aanvraag-levensonderhoud",
+    "client": {
+      "BurgerServiceNr": "123456789",
+      "Voornamen": "Jan Pieter",
+      "Voorvoegsel": "de",
+      "Achternaam": "Vries",
+      "Geslacht": "man",
+      "Geboortedatum": "1980-02-20",
+      "Correspondentieadres": {
+        "Straatnaam": "Dorpsstraat",
+        "Huisnummer": "10",
+        "Postcode": "1234AB",
+        "Woonplaatsnaam": "Nederasselt"
+      },
+      "Nationaliteit": {
+        "CdNationaliteit": "NL"
+      },
+      "Telefoonnr": [
+        {
+          "Netnr": "024",
+          "Abonneenr": "1234567",
+          "TypeTelefoonnr": "Mobiel"
+        }
+      ],
+      "EMailAdresClient": "jan.devries@example.com",
+      "Relatie": {
+        "SoortRelatie": "Partner",
+        "Begindatum": "2010-05-01",
+        "Partner": {
+          "BurgerServiceNr": "987654321",
+          "Voornamen": "Anna Maria",
+          "Voorvoegsel": "",
+          "Achternaam": "De Vries",
+          "Geslacht": "vrouw",
+          "Geboortedatum": "1982-11-15",
+          "Correspondentieadres": {
+            "Straatnaam": "Dorpsstraat",
+            "Huisnummer": "10",
+            "Postcode": "1234AB",
+            "Woonplaatsnaam": "Nederasselt"
+          }
+        }
+      }
+    }
+  },
+  "filePaths": [
+    "s3://bucketnaam/OF-7623DV/OF-7623DV.pdf"
+  ],
+  "fileObjects": [
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-7623DV/OF-7623DV.pdf",
+      "fileName": "OF-7623DV.pdf",
+      "objectType": "submission"
+    }
+  ]
+}
