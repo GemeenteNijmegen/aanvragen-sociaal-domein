@@ -1,0 +1,55 @@
+{
+  "enrichedObject": {
+    "pdf": "https://mijn-services.accp.nijmegen.nl/open-zaak/documenten/api/v1/enkelvoudiginformatieobjecten/73e18cc6-66d3-45e3-ab1d-dc6869fff8be",
+    "attachments": [],
+    "reference": "OF-JB4HSD",
+    "objectUrl": "https://mijn-services.accp.nijmegen.nl/objects/api/v2/objects/602cdf66-375d-43a8-9431-c93f08fbd84c",
+    "objectUUID": "602cdf66-375d-43a8-9431-c93f08fbd84c",
+    "sociaalDomeinRegeling": "BIJSTAND",
+    "zaaktypeIdentificatie": "BIJSTAND-AANVRAAG",
+    "formName": "Bijstandsuitkering aanvragen",
+    "bsn": "999971797",
+    "csv": "https://mijn-services.accp.nijmegen.nl/open-zaak/documenten/api/v1/enkelvoudiginformatieobjecten/b318d28b-f3fe-451e-9d28-cacd980b3e65",
+    "networkShare": "//karelstad/webdata/Webformulieren/TEST",
+    "internalNotificationEmails": [],
+    "bsnOrKvkToFile": true,
+    "client": {
+      "BurgerServiceNr": "999971797",
+      "Achternaam": "Hendriks",
+      "Geslacht": "man",
+      "Geboortedatum": "1985-10-10",
+      "Feitelijkadres": {
+        "Straatnaam": "Korte Nieuwstraat",
+        "Huisnummer": "6",
+        "Postcode": "6511PP",
+        "Woonplaatsnaam": "Nijmegen"
+      },
+      "EMailAdresClient": "w.kremer@nijmegen.nl"
+    },
+    "aanvragerGegevens": {
+      "cosigner": {
+        "cosign_data": {
+          "loa": "",
+          "value": "999971803",
+          "plugin": "digid_oidc",
+          "version": "v2",
+          "attribute": "bsn",
+          "cosign_date": "2026-03-27T10:39:53.552447+00:00"
+        },
+        "cosign_date": "2026-03-27T10:39:53.552447+00:00",
+        "cosign_bsn": "999971803"
+      }
+    }
+  },
+  "filePaths": [
+    "s3://open-forms-main-stack-submissionforwardersubmissio-zwnxg2nji9fu/OF-JB4HSD/OF-JB4HSD.pdf"
+  ],
+  "fileObjects": [
+    {
+      "bucket": "open-forms-main-stack-submissionforwardersubmissio-zwnxg2nji9fu",
+      "objectKey": "OF-JB4HSD/OF-JB4HSD.pdf",
+      "fileName": "OF-JB4HSD.pdf",
+      "objectType": "submission"
+    }
+  ]
+}
