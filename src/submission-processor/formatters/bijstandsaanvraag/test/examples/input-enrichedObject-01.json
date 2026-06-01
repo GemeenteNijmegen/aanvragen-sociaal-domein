@@ -1,0 +1,37 @@
+{
+  "enrichedObject": {
+    "pdf": "https://mijn-services.accp.nijmegen.nl/open-zaak/documenten/api/v1/enkelvoudiginformatieobjecten/81182221-0b10-44fc-8d47-8053b96bccef",
+    "attachments": [],
+    "reference": "OF-24XT42",
+    "objectUrl": "https://mijn-services.accp.nijmegen.nl/objects/api/v2/objects/dfce8ef9-39fa-43e7-86df-92884d3cd8ca",
+    "objectUUID": "dfce8ef9-39fa-43e7-86df-92884d3cd8ca",
+    "sociaalDomeinRegeling": "BIJSTAND",
+    "zaaktypeIdentificatie": "BIJSTAND-AANVRAAG",
+    "datumAanvraag": "2025-08-19",
+    "bsn": "999998791",
+    "formName": "Voorbeeld Sociaal Domein Aanvraag - Testen",
+    "client": {
+      "BurgerServiceNr": "999998791",
+      "Voornamen": "Adam",
+      "Voorvoegsel": "",
+      "Achternaam": "Arendsen",
+      "Geslacht": "man",
+      "Geboortedatum": "1981-01-01",
+      "Telefoonnr": {
+        "Abonneenr": "06-12345678"
+      },
+      "EMailAdresClient": "example@nijmegen.nl"
+    }
+  },
+  "filePaths": [
+    "s3://bucketnaam/OF-24XT42/OF-24XT42.pdf"
+  ],
+  "fileObjects": [
+    {
+      "bucket": "bucketnaam",
+      "objectKey": "OF-24XT42/OF-24XT42.pdf",
+      "fileName": "OF-24XT42.pdf",
+      "objectType": "submission"
+    }
+  ]
+}

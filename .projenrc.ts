@@ -3,6 +3,7 @@ const project = new GemeenteNijmegenCdkApp({
   cdkVersion: '2.1.0',
   defaultReleaseBranch: 'main',
   deps: [
+    '@gemeentenijmegen/projen-project-type',
     '@gemeentenijmegen/utils',
     '@aws-sdk/client-sqs',
     '@aws-lambda-powertools/logger',
@@ -10,7 +11,6 @@ const project = new GemeenteNijmegenCdkApp({
     'zod',
   ],
   devDeps: [
-    '@gemeentenijmegen/projen-project-type',
     'dotenv',
     '@gemeentenijmegen/aws-constructs',
     '@aws-lambda-powertools/idempotency',
