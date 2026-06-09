@@ -122,14 +122,14 @@ export interface RegelingCodes {
 
 export function getRegelingCodes(sociaalDomeinRegeling: string | undefined, zaaktypeIdentificatie: string | undefined, logger: Logger) {
   // Dit wordt herbouwd in een aparte flow
-  if (sociaalDomeinRegeling === 'BIJSTAND' && zaaktypeIdentificatie === 'BIJSTAND_AANVRAAG') {
+  if (sociaalDomeinRegeling === 'BIJSTAND' && zaaktypeIdentificatie === 'BIJSTAND-AANVRAAG') {
     return {
       berichtsoort: BIJSTAND_TEMP_BERICHTSOORT,
       zaaktypeCode: BIJSTAND_ZAAKTYPECODE,
     };
   }
 
-  if (sociaalDomeinRegeling === 'BBZ' && zaaktypeIdentificatie === 'BBZ_AANVRAAG') {
+  if (sociaalDomeinRegeling === 'BBZ' && zaaktypeIdentificatie === 'BBZ-AANVRAAG') {
     return {
       berichtsoort: BBZ_TEMP_BERICHTSOORT,
       zaaktypeCode: BBZ_ZAAKTYPECODE,
