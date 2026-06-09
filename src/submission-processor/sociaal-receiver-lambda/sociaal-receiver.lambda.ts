@@ -14,9 +14,6 @@ const processor = new BatchProcessor(EventType.SQS);
 const tracer = new Tracer({
   serviceName: 'sociaal-receiver',
 });
-tracer.annotateColdStart(); // Hier nog naar kijken, levert onnodige errors op in logs
-tracer.addServiceNameAnnotation();
-
 const logger = new Logger({ serviceName: 'sociaal-receiver' });
 
 async function initalize(): Promise<SociaalReceiverHandlerProps> {

@@ -1,13 +1,13 @@
 import { Criticality, QueueWithDlq } from '@gemeentenijmegen/aws-constructs';
 import { Duration } from 'aws-cdk-lib';
-import { Role } from 'aws-cdk-lib/aws-iam';
 import { IKey, Key } from 'aws-cdk-lib/aws-kms';
 import { SqsEventSource, SqsEventSourceProps } from 'aws-cdk-lib/aws-lambda-event-sources';
 import { IQueue, Queue } from 'aws-cdk-lib/aws-sqs';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
-import { Statics } from '../Statics';
-import { SociaalReceiverFunction } from './sociaal-receiver-lambda/sociaal-receiver-function';
+import { setupESBQueue, setupESBIITQueue } from './outbound-senders/SetupESBQueues';
+import { Statics } from './Statics';
+import { SociaalReceiverFunction } from './submission-processor/sociaal-receiver-lambda/sociaal-receiver-function';
 
 
 interface SubmissionProcessorOptions {
@@ -43,8 +43,8 @@ export class SubmissionProcessor extends Construct {
     const inputQueueSociaalArn = StringParameter.fromStringParameterName(this, 'shared-submission-sqs-sociaal-arn-ssm', Statics.ssmSharedSubmissionSQSSociaalArn).stringValue;
     this.inputQueueSociaal = Queue.fromQueueArn(this, 'input-queue-sociaal', inputQueueSociaalArn) as Queue;
 
-    this.esbQueu = this.setupESBQueue();
-    this.esbIITQueue = this.setupESBIITQueue();
+    this.esbQueu = setupESBQueue(this, this.kmsKey, this.options.criticality);
+    this.esbIITQueue = setupESBIITQueue(this, this.kmsKey, this.options.criticality);
     this.setupSociaalReceiverLambda();
   }
 
@@ -70,38 +70,4 @@ export class SubmissionProcessor extends Construct {
     this.esbIITQueue.queue.grantSendMessages(sociaalReceiverLambda);
     this.kmsKey.grantDecrypt(sociaalReceiverLambda);
   }
-  private setupESBQueue() {
-    const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
-    const esbRole = Role.fromRoleArn(this, 'esb-role-account-shared', esbRoleArn) as Role;
-
-    const esbQueue = new QueueWithDlq(this, 'esb-queue-with-dlq-sociaal-aanvragen', {
-      identifier: 'esb-sociaal-aanvragen',
-      kmsKey: this.kmsKey,
-      fifo: true,
-      criticality: this.options.criticality,
-      role: esbRole,
-      grantDlqSend: true,
-    });
-    return esbQueue;
-  };
-
-  /**
-   * Temporary queue until we can use the regular sociaal aanvragen route.
-   * This requires a zaakdms process in Suite, which cannot be made right now.
-   * Goal to delete this within a year.
-   */
-  private setupESBIITQueue() {
-    const esbRoleArn = StringParameter.fromStringParameterName(this, 'esb-iit-role-arn-ssm', Statics.ssmSharedSubmissionEsbRoleArn).stringValue;
-    const esbRole = Role.fromRoleArn(this, 'esb-iit-role-account-shared', esbRoleArn) as Role;
-
-    const esbIITQueue = new QueueWithDlq(this, 'esb-iit-queue-with-dlq-sociaal-aanvragen', {
-      identifier: 'esb-iit-aanvragen',
-      kmsKey: this.kmsKey,
-      fifo: true,
-      criticality: this.options.criticality,
-      role: esbRole,
-      grantDlqSend: true,
-    });
-    return esbIITQueue;
-  };
 }
