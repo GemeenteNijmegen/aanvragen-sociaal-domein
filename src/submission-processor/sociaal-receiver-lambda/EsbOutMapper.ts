@@ -51,7 +51,7 @@ export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Pro
     ? {
       Webintake: {
         Berichtsoort: regelingCodes.berichtsoort, // ecode voorbeeld, nog flexibeler maken en checken
-        AardVerzoek: 'RT', // Regulier Traject
+        AardVerzoek: regelingCodes.defaultAardVerzoek ?? 'RT',
         Aanvraagdatum: inputObject.datumAanvraag ? inputObject.datumAanvraag.replaceAll('-', '') : '20250101', //YYYYMMDD betere functie maken en anders huidige datum ophalen
         ZaakIdentificatie: submissionData.zaaknummer, //OF-0
         Toelichting: `Form: ${inputObject.formName}`, // Max. tekens
@@ -118,6 +118,7 @@ export interface RegelingCodes {
     Categorie: string;
   }>;
   zaaktypeCode: string;
+  defaultAardVerzoek: string;
 }
 
 export function getRegelingCodes(sociaalDomeinRegeling: string | undefined, zaaktypeIdentificatie: string | undefined, logger: Logger) {
@@ -126,6 +127,7 @@ export function getRegelingCodes(sociaalDomeinRegeling: string | undefined, zaak
     return {
       berichtsoort: BIJSTAND_TEMP_BERICHTSOORT,
       zaaktypeCode: BIJSTAND_ZAAKTYPECODE,
+      defaultAardVerzoek: 'RT',
     };
   }
 
@@ -133,6 +135,7 @@ export function getRegelingCodes(sociaalDomeinRegeling: string | undefined, zaak
     return {
       berichtsoort: BBZ_TEMP_BERICHTSOORT,
       zaaktypeCode: BBZ_ZAAKTYPECODE,
+      defaultAardVerzoek: 'XC',
     };
   }
 
