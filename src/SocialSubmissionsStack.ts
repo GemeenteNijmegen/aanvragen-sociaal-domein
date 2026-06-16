@@ -1,7 +1,7 @@
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Configurable } from './Configuration';
-import { SubmissionProcessor } from './submission-processor/SubmissionProcessor';
+import { SubmissionProcessor } from './SubmissionProcessor';
 
 interface SocialSubmissionsStackProps extends StackProps, Configurable { }
 

@@ -63,11 +63,8 @@ export class PipelineStack extends Stack {
       env: {
         BRANCH_NAME: this.props.configuration.branchName,
       },
-      installCommands: [
-        // We set the node version to the latest 22.x.x release as the middy package used in lambdas requires >=20.
-        'n 22',
-      ],
       commands: [
+        'node -v',
         'npm ci',
         'npx projen build',
       ],
