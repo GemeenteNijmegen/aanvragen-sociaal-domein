@@ -10,7 +10,7 @@ export const BBZ_TEMP_BERICHTSOORT = { VRIJ: { Onderwerp: '77', Categorie: '51' 
 export const BBZ_BERICHTSOORT = {};
 
 export const BIJSTAND_ZAAKTYPECODE = 'B0901';
-export const BBZ_ZAAKTYPECODE = 'B1061';
+export const BBZ_ZAAKTYPECODE = 'B1601';
 
 // Naar class met aparte mapper en error handling
 export async function mapToEsbOut(input: SqsSubmissionBody, logger: Logger): Promise<EsbOutMessage> {
