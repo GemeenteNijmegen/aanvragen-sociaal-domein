@@ -25,14 +25,7 @@ oplevert.
 
 Per object staat de veldvolgorde op één plek (orderedObject). Het zod-schema en de structuurcontrole komen allebei uit die lijst.
 
-| Bestand | Inhoud |
-|---|---|
-| fields.ts | Regels per soort veld |
-| orderedObject.ts | Geordende veldenlijst naar zod-schema en structuur |
-| structure.ts | Volgorde en precies één Berichtsoort |
-| schema.ts | De objecten uit het bericht |
-| report.ts | Zod-fouten en structuurfouten naar problemen |
-| validateWebintake.ts | Ingang: valideren en loggen |
+Mappen en bestanden: zie [opbouw.md](opbouw.md).
 
 ## Berichtstructuur
 
@@ -118,7 +111,7 @@ erDiagram
         optioneel TypeTelefoonnr "01 02 03 99"
     }
     Nationaliteit {
-        verplicht CdNationaliteit "4 cijfers, vaste lijst"
+        verplicht CdNationaliteit "4 cijfers"
     }
 ```
 
@@ -144,6 +137,9 @@ not_allowed, choice.
 | debug | Per probleem | Pad en de werkelijke waarde |
 | error | Validator faalt | Foutmelding, geen berichtinhoud |
 
-Elke regel bevat component, reference en zaakIdentificatie, plus de context die de aanroeper meegeeft. Zonder meegegeven reference wordt
-ZaakIdentificatie gebruikt. Een waarde staat alleen buiten debug als het veld niet geheim is: codes, ZaakIdentificatie en Aanvraagdatum.
+De validator logt via een child van de meegegeven Powertools Logger. De logger van de aanroeper krijgt geen extra sleutels.
+
+Elke regel bevat component en zaakIdentificatie, plus de context die de aanroeper meegeeft. Zo zijn alle regels van één bericht te groeperen.
+ZaakIdentificatie komt van de aanroeper, anders uit het bericht, anders unknown. Een waarde staat alleen buiten debug als het veld niet geheim is:
+codes, ZaakIdentificatie en Aanvraagdatum.
 Onbekende velden komen per object samen in één melding.
