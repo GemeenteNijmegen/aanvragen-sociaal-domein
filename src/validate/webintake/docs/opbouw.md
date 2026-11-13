@@ -18,6 +18,7 @@ webintake/
       errors.json               fouten bovenaan in Webintake
       berichtsoort.json         fouten in Berichtsoort
       client.json               fouten in Client
+      adres-telefoon.json       fouten in adres en Telefoonnr
       production.json           vorm van de huidige mapper
 ```
 
