@@ -3,9 +3,11 @@
   "scripts": {
     "build": "projen build",
     "bump": "projen bump",
+    "bump:releasable-commits": "projen bump:releasable-commits",
     "bundle": "projen bundle",
     "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda": "projen bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda",
     "bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch": "projen bundle:submission-processor/sociaal-receiver-lambda/sociaal-receiver.lambda:watch",
+    "cfn-lint": "projen cfn-lint",
     "clobber": "projen clobber",
     "compile": "projen compile",
     "default": "projen default",
@@ -14,7 +16,6 @@
     "diff": "projen diff",
     "eject": "projen eject",
     "eslint": "projen eslint",
-    "lint": "projen lint",
     "package": "projen package",
     "post-compile": "projen post-compile",
     "post-upgrade": "projen post-upgrade",
@@ -30,40 +31,40 @@
     "projen": "projen"
   },
   "devDependencies": {
-    "@aws-lambda-powertools/batch": "^2.33.0",
-    "@aws-lambda-powertools/idempotency": "^2.33.0",
-    "@gemeentenijmegen/aws-constructs": "^0.0.51",
+    "@aws-lambda-powertools/batch": "^2.36.0",
+    "@aws-lambda-powertools/idempotency": "^2.36.0",
+    "@gemeentenijmegen/aws-constructs": "^0.0.57",
     "@middy/core": "5.5.1",
     "@stylistic/eslint-plugin": "^2",
-    "@types/aws-lambda": "^8.10.161",
+    "@types/aws-lambda": "^8.10.164",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.12.2",
+    "@types/node": "^24.19.2",
     "@typescript-eslint/eslint-plugin": "^8",
     "@typescript-eslint/parser": "^8",
     "aws-cdk": "^2",
-    "commit-and-tag-version": "^12",
+    "commit-and-tag-version": "^13",
     "dotenv": "^17.4.2",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9",
-    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-import-resolver-typescript": "^4.4.5",
     "eslint-plugin-import": "^2.32.0",
-    "jest": "^30.3.0",
-    "jest-junit": "^16",
-    "projen": "^0.99.52",
-    "ts-jest": "^29.4.9",
+    "jest": "^30.5.2",
+    "jest-junit": "^17",
+    "projen": "^0.104.27",
+    "ts-jest": "^29.4.15",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.33.0",
-    "@aws-lambda-powertools/tracer": "^2.33.0",
-    "@aws-sdk/client-sqs": "^3.1043.0",
-    "@gemeentenijmegen/aws-constructs": "^0.0.51",
-    "@gemeentenijmegen/projen-project-type": "^1.13.0",
+    "@aws-lambda-powertools/logger": "^2.36.0",
+    "@aws-lambda-powertools/tracer": "^2.36.0",
+    "@aws-sdk/client-sqs": "^3.1166.0",
+    "@gemeentenijmegen/aws-constructs": "^0.0.57",
+    "@gemeentenijmegen/projen-project-type": "^1.16.4",
     "@gemeentenijmegen/utils": "^0.0.38",
     "aws-cdk-lib": "^2.1.0",
     "constructs": "^10.5.1",
-    "zod": "^4.4.3"
+    "zod": "^4.6.7"
   },
   "devEngines": {
     "packageManager": {
@@ -119,7 +120,7 @@
       "^.+\\.[t]sx?$": [
         "ts-jest",
         {
-          "tsconfig": "tsconfig.dev.json"
+          "tsconfig": "test/tsconfig.json"
         }
       ]
     }
