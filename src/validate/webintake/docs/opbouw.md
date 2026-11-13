@@ -19,6 +19,7 @@ webintake/
       berichtsoort.json         fouten in Berichtsoort
       client.json               fouten in Client
       adres-telefoon.json       fouten in adres en Telefoonnr
+      relatie.json              fouten in Partner en BijstandspersoonOverig
       production.json           vorm van de huidige mapper
 ```
 

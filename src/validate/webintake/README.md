@@ -43,6 +43,9 @@ erDiagram
     }
 ```
 
+SoortRelatie: 1 huwelijk, 2 geregistreerd partnerschap, 9 anders. CdFictieveGeboortedat en CdFictieveBegindat zeggen welk deel van de datum
+ervoor fictief is: 0 geen, 1 dag, 2 maand, 3 dag en maand, 4 jaar, 5 dag en jaar, 6 maand en jaar, 7 dag, maand en jaar, 8 onbekend welke delen.
+
 ```mermaid
 erDiagram
     Client {
