@@ -17,6 +17,7 @@ webintake/
       valid.json                geldig en volledig
       errors.json               fouten bovenaan in Webintake
       berichtsoort.json         fouten in Berichtsoort
+      client.json               fouten in Client
       production.json           vorm van de huidige mapper
 ```
 
