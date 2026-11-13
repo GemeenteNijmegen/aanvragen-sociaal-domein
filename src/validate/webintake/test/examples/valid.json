@@ -1,0 +1,12 @@
+{
+  "Berichtsoort": {
+    "VRIJ": {
+      "Onderwerp": "50",
+      "Categorie": "50"
+    }
+  },
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0001",
+  "Toelichting": "Verzonnen toelichting voor een test.",
+  "Client": {}
+}
