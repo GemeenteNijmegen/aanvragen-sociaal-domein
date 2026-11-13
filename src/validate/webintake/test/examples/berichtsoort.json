@@ -1,0 +1,14 @@
+{
+  "Berichtsoort": {
+    "WWB": {
+      "Onderwerp": "01"
+    },
+    "VRIJ": {
+      "Onderwerp": "49",
+      "Categorie": "50"
+    }
+  },
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0003",
+  "Client": {}
+}

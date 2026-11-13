@@ -1,13 +1,14 @@
 import { z } from 'zod';
-import { OrderIssue } from './fieldOrder';
+import { StructureIssue } from './fieldOrder';
 
 /**
- * The issue code of zod, such as `too_big` or `unrecognized_keys`, plus two of our own:
+ * The issue code of zod, such as `too_big` or `unrecognized_keys`, plus three of our own:
  *
  * - `missing`: a required field is absent. Zod reports this as `invalid_type`, which also means a wrong type.
  * - `order`: a field is in the wrong place. Zod does not check the order.
+ * - `choice`: an object that must hold exactly one of its fields holds none or more than one.
  */
-export type ProblemCode = z.core.$ZodIssue['code'] | 'missing' | 'order';
+export type ProblemCode = z.core.$ZodIssue['code'] | 'missing' | 'order' | 'choice';
 
 export interface ProblemLimit {
   min?: number;
@@ -29,11 +30,11 @@ export interface ProblemWithValue {
 }
 
 /**
- * Turns zod issues and order issues into problems. Zod issues must come from safeParse with `reportInput: true`.
+ * Turns zod issues and structure issues (order and choice) into problems. Zod issues must come from safeParse with `reportInput: true`.
  *
  * Zod messages contain no input values, so detail never holds personal data. The value is returned apart, for the debug log only.
  */
-export function toProblems(rootName: string, issues: z.core.$ZodIssue[], orderIssues: OrderIssue[]): ProblemWithValue[] {
+export function toProblems(rootName: string, issues: z.core.$ZodIssue[], structureIssues: StructureIssue[]): ProblemWithValue[] {
   const fieldProblems = issues.map((issue): ProblemWithValue => {
     const location = locationOf(issue.path, rootName);
     if (issue.code === 'invalid_type' && issue.input === undefined) {
@@ -47,11 +48,14 @@ export function toProblems(rootName: string, issues: z.core.$ZodIssue[], orderIs
     const limit = limitOf(issue);
     return { problem: { ...location, code: issue.code, detail: issue.message, ...(limit ? { limit } : {}) }, value: issue.input };
   });
-  const orderProblems = orderIssues.map((issue): ProblemWithValue => {
-    const detail = `Must come after ${issue.expectedBefore}. Expected order: ${issue.expectedOrder.join(', ')}`;
-    return { problem: { ...locationOf(issue.path, rootName), code: 'order', detail } };
+  const structureProblems = structureIssues.map((issue): ProblemWithValue => {
+    const detail =
+      issue.code === 'order'
+        ? `Must come after ${issue.expectedBefore}. Expected order: ${issue.expectedOrder.join(', ')}`
+        : `Expected exactly one of ${issue.options.join(', ')}, found ${issue.found.join(', ') || 'none'}`;
+    return { problem: { ...locationOf(issue.path, rootName), code: issue.code, detail } };
   });
-  return [...fieldProblems, ...orderProblems];
+  return [...fieldProblems, ...structureProblems];
 }
 
 function limitOf(issue: z.core.$ZodIssue): ProblemLimit | undefined {

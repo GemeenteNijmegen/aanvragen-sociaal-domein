@@ -23,6 +23,9 @@ export interface MessageDefinition {
 
   /**
    * Zod schema for the fields. Use a strict object so unknown fields are reported.
+   *
+   * Mark an object with `.meta({ choice: true })` when exactly one of its fields must be present. Zod cannot report that next to other problems
+   * in the same object, so validateMessage checks it on the raw input.
    */
   schema: z.ZodType;
 
@@ -47,7 +50,7 @@ export interface MessageDefinition {
 }
 
 /**
- * Runs the zod schema and, when given, the order check, then logs and returns all problems.
+ * Runs the zod schema, the choice check and, when given, the order check, then logs and returns all problems.
  *
  * Shared by all validators. Never throws: an error in the validator itself gives status `error`.
  */
@@ -63,9 +66,9 @@ export function validateMessage(input: unknown, definition: MessageDefinition, o
     });
     const parsed = definition.schema.safeParse(input, { reportInput: true });
     const issues = parsed.success ? [] : parsed.error.issues;
-    const order = definition.checkOrder ? fieldOrderOf(definition.schema) : undefined;
-    const orderIssues = order ? checkFieldOrder(order, input) : [];
-    const entries = toProblems(name, issues, orderIssues);
+    const order = fieldOrderOf(definition.schema);
+    const structureIssues = order ? checkFieldOrder(order, input, definition.checkOrder ?? false) : [];
+    const entries = toProblems(name, issues, structureIssues);
     if (!entries.length) {
       logger.info(`${name} valid`);
       return { status: 'valid', problems: [] };

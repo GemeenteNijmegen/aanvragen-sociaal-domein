@@ -1,5 +1,6 @@
 import { Logger } from '@aws-lambda-powertools/logger';
 import { MessageValidator, WebintakeValidator } from '../WebintakeValidator';
+import berichtsoort from './examples/berichtsoort.json';
 import errors from './examples/errors.json';
 import valid from './examples/valid.json';
 
@@ -64,6 +65,24 @@ describe('WebintakeValidator', () => {
         },
       ],
     });
+  });
+
+  it('reports a Berichtsoort with two soorten and a wrong code in one of them', () => {
+    captureLogs();
+    expect(validator.validate(berichtsoort, { logger: newLogger() }).problems).toEqual([
+      {
+        path: 'Berichtsoort.VRIJ.Onderwerp',
+        segments: ['Berichtsoort', 'VRIJ', 'Onderwerp'],
+        code: 'invalid_format',
+        detail: 'Expected a code from 50 to 99',
+      },
+      {
+        path: 'Berichtsoort',
+        segments: ['Berichtsoort'],
+        code: 'choice',
+        detail: 'Expected exactly one of WWB, IOAW, WMO, REI, SHV, INB, VRIJ, found WWB, VRIJ',
+      },
+    ]);
   });
 
   it('keeps personal data out of non-debug lines and tags every line', () => {
