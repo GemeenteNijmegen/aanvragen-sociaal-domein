@@ -1,6 +1,7 @@
 import { Logger } from '@aws-lambda-powertools/logger';
 import { MessageValidator, WebintakeValidator } from '../WebintakeValidator';
 import berichtsoort from './examples/berichtsoort.json';
+import client from './examples/client.json';
 import errors from './examples/errors.json';
 import valid from './examples/valid.json';
 
@@ -85,14 +86,32 @@ describe('WebintakeValidator', () => {
     ]);
   });
 
+  it('reports wrong, missing and misplaced fields of the Client', () => {
+    captureLogs();
+    expect(validator.validate(client, { logger: newLogger() }).problems).toEqual([
+      { path: 'Client.BurgerServiceNr', segments: ['Client', 'BurgerServiceNr'], code: 'invalid_format', detail: 'Expected 9 digits' },
+      { path: 'Client.Achternaam', segments: ['Client', 'Achternaam'], code: 'invalid_format', detail: 'Expected no digits' },
+      { path: 'Client.Geboortedatum', segments: ['Client', 'Geboortedatum'], code: 'missing', detail: 'Field is required' },
+      {
+        path: 'Client.Geslacht',
+        segments: ['Client', 'Geslacht'],
+        code: 'order',
+        detail: 'Must come after BurgerServiceNr. Expected order: BurgerServiceNr, Achternaam, Geslacht, CdFictieveGeboortedat',
+      },
+    ]);
+  });
+
   it('keeps personal data out of non-debug lines and tags every line', () => {
     const logs = captureLogs();
     validator.validate(errors, { logger: newLogger(), context: { mode: 'dry-run' } });
-    const toelichting = (line: LogLine) => JSON.stringify(line).includes('verzonnen toelichting');
-    expect(logs.filter((line) => line.level !== 'DEBUG').some(toelichting)).toBe(false);
-    expect(logs.filter((line) => line.level === 'DEBUG').some(toelichting)).toBe(true);
+    validator.validate(client, { logger: newLogger(), context: { mode: 'dry-run' } });
+    for (const personalData of ['verzonnen toelichting', '12345678', 'Verzonnen1']) {
+      const contains = (line: LogLine) => JSON.stringify(line).includes(personalData);
+      expect(logs.filter((line) => line.level !== 'DEBUG').some(contains)).toBe(false);
+      expect(logs.filter((line) => line.level === 'DEBUG').some(contains)).toBe(true);
+    }
     for (const line of logs) {
-      expect(line).toMatchObject({ zaakIdentificatie: 'OF-TEST-0002', context: { mode: 'dry-run' } });
+      expect(line).toMatchObject({ zaakIdentificatie: expect.stringMatching(/^OF-TEST-000[24]$/), context: { mode: 'dry-run' } });
     }
   });
 

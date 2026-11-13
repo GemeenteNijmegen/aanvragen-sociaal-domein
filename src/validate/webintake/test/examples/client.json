@@ -1,0 +1,16 @@
+{
+  "Berichtsoort": {
+    "VRIJ": {
+      "Onderwerp": "50",
+      "Categorie": "50"
+    }
+  },
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0004",
+  "Client": {
+    "Geslacht": "2",
+    "BurgerServiceNr": "12345678",
+    "Achternaam": "Verzonnen1",
+    "CdFictieveGeboortedat": "0"
+  }
+}

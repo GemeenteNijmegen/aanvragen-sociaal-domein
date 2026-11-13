@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { aardVerzoek, datum, indBestaandeKlant, vrijeTekst, zaakIdentificatie } from './fieldRules';
+import { client } from './persoon';
 
 const vrijCode = z.string().regex(/^[5-9]\d$/, 'Expected a code from 50 to 99');
 
@@ -16,8 +17,6 @@ const berichtsoort = z
     VRIJ: z.strictObject({ Onderwerp: vrijCode, Categorie: vrijCode.optional() }).optional(),
   })
   .meta({ choice: true });
-
-const client = z.looseObject({});
 
 export const webintake = z.strictObject({
   Berichtsoort: berichtsoort,

@@ -8,5 +8,16 @@
   "Aanvraagdatum": "20260101",
   "ZaakIdentificatie": "OF-TEST-0001",
   "Toelichting": "Verzonnen toelichting voor een test.",
-  "Client": {}
+  "Client": {
+    "BurgerServiceNr": "999999999",
+    "Voornamen": "Testa",
+    "Voorletters": "T",
+    "Achternaam": "Verzonnen",
+    "Geslacht": "2",
+    "Geboortedatum": "19800101",
+    "CdFictieveGeboortedat": "0",
+    "Iban": "NL00TEST0123456789",
+    "Bic": "TESTNL2A",
+    "EMailAdresClient": "test@voorbeeld.invalid"
+  }
 }
