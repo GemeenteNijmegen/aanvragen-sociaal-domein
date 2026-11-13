@@ -1,0 +1,40 @@
+{
+  "Berichtsoort": {
+    "VRIJ": {
+      "Onderwerp": "50",
+      "Categorie": "50"
+    }
+  },
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0005",
+  "Client": {
+    "BurgerServiceNr": "999999999",
+    "Voornamen": "Testa",
+    "Voorletters": "T",
+    "Achternaam": "Verzonnen",
+    "Geslacht": "2",
+    "Geboortedatum": "19800101",
+    "CdFictieveGeboortedat": "0",
+    "Correspondentieadres": {
+      "Straatnaam": "Verzonnenstraatnaamvantestjess",
+      "Huisnummer": "1",
+      "Postcode": "9999 ZZ",
+      "Woonplaatsnaam": "Testdorp"
+    },
+    "Iban": "NL00TEST0123456789",
+    "Bic": "TESTNL2A",
+    "Telefoonnr": [
+      {
+        "Netnr": "0999",
+        "Abonneenr": "999999",
+        "TypeTelefoonnr": "01"
+      },
+      {
+        "Netnr": "06",
+        "Abonneenr": "9999999X",
+        "TypeTelefoonnr": "02"
+      }
+    ],
+    "EMailAdresClient": "test@voorbeeld.invalid"
+  }
+}
