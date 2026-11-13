@@ -28,7 +28,7 @@ flowchart TD
         L[Loggen]
     end
     In --> V
-    In -.->|als checkOrder aan| O
+    In -.->|checkOrder of choice| O
     V --> T
     T --> M
     O -.-> M

@@ -4,6 +4,7 @@ import adresTelefoon from './examples/adres-telefoon.json';
 import berichtsoort from './examples/berichtsoort.json';
 import client from './examples/client.json';
 import errors from './examples/errors.json';
+import production from './examples/production.json';
 import relatie from './examples/relatie.json';
 import valid from './examples/valid.json';
 
@@ -149,6 +150,17 @@ describe('WebintakeValidator', () => {
         code: 'invalid_format',
         detail: 'Expected a date as YYYYMMDD',
       },
+    ]);
+  });
+
+  it('reports the order of the current mapper and a phone number with a dash', () => {
+    captureLogs();
+    const result = validator.validate(production, { logger: newLogger() });
+    expect(result.status).toBe('invalid');
+    expect(result.problems.map((problem) => [problem.path, problem.code])).toEqual([
+      ['Client.Telefoonnr[0].Abonneenr', 'invalid_format'],
+      ['AardVerzoek', 'order'],
+      ['Client.Geboortedatum', 'order'],
     ]);
   });
 

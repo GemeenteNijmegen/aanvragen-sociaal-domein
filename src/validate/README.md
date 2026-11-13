@@ -41,7 +41,8 @@ flowchart TD
 Het contract staat in MessageValidator.ts: de interface MessageValidator met één methode, validate, plus de opties en het resultaat. Code die een
 validator gebruikt, kent alleen dat bestand. De gedeelde logica (loggen, nooit gooien, problemen samenvoegen) staat in validateMessage.ts. Een
 validator geeft die een definitie mee: naam, component, zod-schema en logsleutels, en checkOrder: true als de volgorde telt. De verwachte
-volgorde komt dan uit het schema zelf. Een object waarin precies één veld hoort, krijgt in het schema .meta({ choice: true }). Een validator toevoegen: [nieuwe validator](docs/nieuwe-validator.md).
+volgorde komt dan uit het schema zelf. Een object waarin precies één veld hoort, krijgt in het schema .meta({ choice: true }). Een validator
+toevoegen: [nieuwe validator](docs/nieuwe-validator.md).
 
 ## Verder lezen
 
