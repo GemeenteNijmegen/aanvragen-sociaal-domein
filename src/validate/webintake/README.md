@@ -1,31 +1,8 @@
 # Webintake-validatie
 
-Controleert een Webintake-bericht (JSON) op vorm: velden, verplichte en onbekende velden, volgorde en Berichtsoort. Het bericht wordt één op één naar
-XML omgezet, dus de volgorde van de sleutels telt.
-
-validateWebintake gooit nooit en verandert het bericht niet. Uitkomst: valid, invalid of error. Error betekent dat de validator zelf faalde en het
-bericht niet beoordeeld is.
-
-## Opbouw
-
-```mermaid
-flowchart LR
-    In[Webintake JSON] --> Zod[Zod-schema]
-    In --> Str[Structuurcontrole]
-    Zod --> P[Problemen]
-    Str --> P
-    P --> Log[Logging]
-    P --> R[Resultaat]
-```
-
-Het zod-schema controleert per veld type, verplicht, lengte, patroon en toegestane waarden, en meldt onbekende velden. De structuurcontrole loopt
-over de ruwe invoer en controleert de volgorde per object en dat er precies één Berichtsoort is. Dat kan niet in zod: een refine op een object draait
-niet als een veld al fout is, en zod geeft de sleutels al gesorteerd door. Beide controles draaien altijd, zodat één bericht alle problemen tegelijk
-oplevert.
-
-Per object staat de veldvolgorde op één plek (orderedObject). Het zod-schema en de structuurcontrole komen allebei uit die lijst.
-
-Mappen en bestanden: zie [opbouw.md](opbouw.md).
+WebintakeValidator controleert een Webintake-bericht (JSON) op vorm: velden, verplichte en onbekende velden, volgorde en Berichtsoort. Het bericht
+wordt één op één omgezet, dus de volgorde van de sleutels telt. Gebruik en gedrag: [validatie](../README.md). Waarom zod plus een eigen
+volgordecontrole: [technische keuzes](../docs/technische-keuzes.md). Mappen en bestanden: [opbouw](docs/opbouw.md).
 
 ## Berichtstructuur
 
@@ -127,19 +104,16 @@ Berichtsoort heeft precies één van deze soorten, elk met Onderwerp en waar gen
 
 ## Meldingen en logging
 
-Elk probleem heeft een pad (Client.Relatie.Partner.Geboortedatum), een code en een detail. Codes: missing, unknown_field, order, type, format, length,
-not_allowed, choice.
+Het pad begint bij Webintake, bijvoorbeeld Client.Relatie.Partner.Geboortedatum. Een probleem op Webintake zelf, zoals een onbekend veld bovenaan,
+heeft als pad Webintake. Codes: die van zod (zoals too_big, invalid_value, unrecognized_keys), plus missing, order en choice (Berichtsoort heeft
+niet precies één soort).
 
 | Niveau | Wanneer | Inhoud |
 |---|---|---|
-| info | Geldig | Berichtsoort |
-| warn | Per probleem en één samenvatting | Pad, code, detail; geen persoonsgegevens |
+| info | Geldig | Webintake valid, met de vaste sleutels |
+| warn | Per probleem en één samenvatting | Pad, code, detail en limit, geen persoonsgegevens |
 | debug | Per probleem | Pad en de werkelijke waarde |
 | error | Validator faalt | Foutmelding, geen berichtinhoud |
 
-De validator logt via een child van de meegegeven Powertools Logger. De logger van de aanroeper krijgt geen extra sleutels.
-
-Elke regel bevat component en zaakIdentificatie, plus de context die de aanroeper meegeeft. Zo zijn alle regels van één bericht te groeperen.
-ZaakIdentificatie komt van de aanroeper, anders uit het bericht, anders unknown. Een waarde staat alleen buiten debug als het veld niet geheim is:
-codes, ZaakIdentificatie en Aanvraagdatum.
-Onbekende velden komen per object samen in één melding.
+Elke regel heeft component webintake-validation en zaakIdentificatie, zodat alle regels van één bericht te groeperen zijn. ZaakIdentificatie komt
+uit het bericht, anders unknown. De aanroeper kan hem overschrijven met logKeys.
