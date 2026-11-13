@@ -30,3 +30,4 @@ export const netnr = z.string().regex(/^\d{0,5}$/, 'Expected up to 5 digits');
 export const abonneenr = z.string().regex(/^\d{0,10}$/, 'Expected up to 10 digits');
 export const typeTelefoonnr = z.enum(['01', '02', '03', '99']);
 export const cdNationaliteit = z.string().regex(/^\d{4}$/, 'Expected 4 digits');
+export const soortRelatie = z.enum(['1', '2', '9']);

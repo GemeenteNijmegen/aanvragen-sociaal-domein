@@ -4,6 +4,7 @@ import adresTelefoon from './examples/adres-telefoon.json';
 import berichtsoort from './examples/berichtsoort.json';
 import client from './examples/client.json';
 import errors from './examples/errors.json';
+import relatie from './examples/relatie.json';
 import valid from './examples/valid.json';
 
 process.env.POWERTOOLS_DEV = 'true';
@@ -123,6 +124,30 @@ describe('WebintakeValidator', () => {
         segments: ['Client', 'Telefoonnr', 1, 'Abonneenr'],
         code: 'invalid_format',
         detail: 'Expected up to 10 digits',
+      },
+    ]);
+  });
+
+  it('reports problems in the Partner and in the second BijstandspersoonOverig', () => {
+    captureLogs();
+    expect(validator.validate(relatie, { logger: newLogger() }).problems).toEqual([
+      {
+        path: 'Client.Relatie.Partner.BurgerServiceNr',
+        segments: ['Client', 'Relatie', 'Partner', 'BurgerServiceNr'],
+        code: 'missing',
+        detail: 'Field is required',
+      },
+      {
+        path: 'Client.Relatie.Partner',
+        segments: ['Client', 'Relatie', 'Partner'],
+        code: 'unrecognized_keys',
+        detail: 'Unrecognized key: "Relatie"',
+      },
+      {
+        path: 'Client.BijstandspersoonOverig[1].Geboortedatum',
+        segments: ['Client', 'BijstandspersoonOverig', 1, 'Geboortedatum'],
+        code: 'invalid_format',
+        detail: 'Expected a date as YYYYMMDD',
       },
     ]);
   });

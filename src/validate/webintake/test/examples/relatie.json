@@ -1,0 +1,57 @@
+{
+  "Berichtsoort": {
+    "VRIJ": {
+      "Onderwerp": "50",
+      "Categorie": "50"
+    }
+  },
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0006",
+  "Client": {
+    "BurgerServiceNr": "999999999",
+    "Voornamen": "Testa",
+    "Voorletters": "T",
+    "Achternaam": "Verzonnen",
+    "Geslacht": "2",
+    "Geboortedatum": "19800101",
+    "CdFictieveGeboortedat": "0",
+    "Iban": "NL00TEST0123456789",
+    "Bic": "TESTNL2A",
+    "EMailAdresClient": "test@voorbeeld.invalid",
+    "Relatie": {
+      "SoortRelatie": "1",
+      "Begindatum": "20100101",
+      "CdFictieveBegindat": "0",
+      "Partner": {
+        "Voornamen": "Testo",
+        "Achternaam": "Verzonnen",
+        "Geslacht": "1",
+        "Geboortedatum": "19790202",
+        "CdFictieveGeboortedat": "0",
+        "Relatie": {
+          "SoortRelatie": "1",
+          "Begindatum": "20100101",
+          "CdFictieveBegindat": "0"
+        }
+      }
+    },
+    "BijstandspersoonOverig": [
+      {
+        "BurgerServiceNr": "999999997",
+        "Voornamen": "Testje",
+        "Achternaam": "Verzonnen",
+        "Geslacht": "9",
+        "Geboortedatum": "20150303",
+        "CdFictieveGeboortedat": "0"
+      },
+      {
+        "BurgerServiceNr": "999999996",
+        "Voornamen": "Testje",
+        "Achternaam": "Verzonnen",
+        "Geslacht": "9",
+        "Geboortedatum": "2016-04-04",
+        "CdFictieveGeboortedat": "0"
+      }
+    ]
+  }
+}

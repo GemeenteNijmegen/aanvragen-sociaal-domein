@@ -13,6 +13,7 @@ import {
   iban,
   naam,
   netnr,
+  soortRelatie,
   typeTelefoonnr,
   voorletters,
   voorvoegsel,
@@ -20,7 +21,6 @@ import {
 
 const telefoonnr = z.strictObject({ Netnr: netnr.optional(), Abonneenr: abonneenr.optional(), TypeTelefoonnr: typeTelefoonnr.optional() });
 const nationaliteit = z.strictObject({ CdNationaliteit: cdNationaliteit });
-const relatie = z.looseObject({});
 
 export const persoon = z.strictObject({
   BurgerServiceNr: bsn,
@@ -43,7 +43,14 @@ export const persoon = z.strictObject({
   EMailAdresClient: emailAdres.optional(),
 });
 
+const relatie = z.strictObject({
+  SoortRelatie: soortRelatie,
+  Begindatum: datum,
+  CdFictieveBegindat: cdFictieveDatum,
+  Partner: persoon.optional(),
+});
+
 export const client = persoon.extend({
   Relatie: relatie.optional(),
-  BijstandspersoonOverig: z.array(z.looseObject({})).optional(),
+  BijstandspersoonOverig: z.array(persoon).optional(),
 });

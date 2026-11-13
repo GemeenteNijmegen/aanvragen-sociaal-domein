@@ -49,6 +49,29 @@
         "TypeTelefoonnr": "02"
       }
     ],
-    "EMailAdresClient": "test@voorbeeld.invalid"
+    "EMailAdresClient": "test@voorbeeld.invalid",
+    "Relatie": {
+      "SoortRelatie": "1",
+      "Begindatum": "20100101",
+      "CdFictieveBegindat": "0",
+      "Partner": {
+        "BurgerServiceNr": "999999998",
+        "Voornamen": "Testo",
+        "Achternaam": "Verzonnen",
+        "Geslacht": "1",
+        "Geboortedatum": "19790202",
+        "CdFictieveGeboortedat": "0"
+      }
+    },
+    "BijstandspersoonOverig": [
+      {
+        "BurgerServiceNr": "999999997",
+        "Voornamen": "Testje",
+        "Achternaam": "Verzonnen",
+        "Geslacht": "9",
+        "Geboortedatum": "20150303",
+        "CdFictieveGeboortedat": "0"
+      }
+    ]
   }
 }
