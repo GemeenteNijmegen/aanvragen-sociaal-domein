@@ -43,5 +43,8 @@ dezelfde zaak samen te zoeken.
 Telt de volgorde wel, zet dan checkOrder: true in de definitie, zoals in webintake/WebintakeValidator.ts. De verwachte volgorde is de volgorde
 waarin de velden in het schema staan, in elk object. Optionele velden en arrays tellen mee; een object binnen bijvoorbeeld .nullable() niet.
 
+Hoort er in een object precies één van de velden, maak de velden dan optioneel en zet .meta({ choice: true }) op het object, zoals Berichtsoort
+in webintake/schema/webintake.ts. Geen refine of union: zie [technische keuzes](technische-keuzes.md).
+
 De klasse importeert MessageValidator, ValidationOptions en ValidationResult uit MessageValidator.ts, MessageDefinition en validateMessage uit
 validateMessage.ts. Een validator importeert niets uit code buiten src/validate, en code buiten src/validate importeert alleen de klasse.

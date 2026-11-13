@@ -15,7 +15,8 @@ webintake/
     WebintakeValidator.test.ts  alle testscenario's
     examples/                   voorbeeldberichten met nepgegevens
       valid.json                geldig en volledig
-      errors.json               fouten op alle niveaus tegelijk
+      errors.json               fouten bovenaan in Webintake
+      berichtsoort.json         fouten in Berichtsoort
       production.json           vorm van de huidige mapper
 ```
 
@@ -34,4 +35,4 @@ wat bij een persoon hoort, ook e-mail, telefoon en nationaliteit. Adres staat ap
 gebruiken fieldRules.ts en gewone zod.
 
 Alle tests staan in WebintakeValidator.test.ts en lopen via WebintakeValidator, met de voorbeeldberichten uit examples. Er zijn geen tests per
-bronbestand.
+bronbestand. Elk deel van het bericht heeft een eigen voorbeeld met fouten, zodat de verwachte problemen per test kort blijven.

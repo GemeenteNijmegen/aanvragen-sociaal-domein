@@ -11,6 +11,10 @@ op schemavolgorde gezet. Daarom controleert fieldOrder de volgorde zelf, op het 
 fieldOrder altijd allebei. De verwachte volgorde komt uit het zod-schema zelf: de volgorde waarin de velden geschreven zijn. Een validator
 waarvoor de volgorde niet telt, zet checkOrder niet aan en gebruikt alleen zod.
 
+Hetzelfde geldt voor een object waarin precies één van de velden hoort, zoals Berichtsoort bij Webintake. Een refine op dat object draait niet
+als er in het object al een fout zit, en een union geeft bij een fout één samengevoegde melding. Zo'n object markeer je in het schema met
+.meta({ choice: true }), en fieldOrder telt dan op de invoer welke velden er zijn. Dat gebeurt altijd, ook als checkOrder uit staat.
+
 ```mermaid
 flowchart TD
     In[Validator krijgt bericht]
@@ -19,7 +23,7 @@ flowchart TD
         T[Tekst, pad en limit]
     end
     subgraph eigen[Eigen code]
-        O[Volgorde controleren]
+        O[Volgorde en keuze]
         M[Probleemcode* en samenvoegen]
         L[Loggen]
     end
@@ -35,10 +39,11 @@ flowchart TD
     class O optional
 ```
 
-Gestippeld: alleen als de validator checkOrder aan heeft, en wat de aanroepende code met het resultaat kan doen.
+Gestippeld: alleen als de validator checkOrder aan heeft of een object met choice, en wat de aanroepende code met het resultaat kan doen.
 
-\* Probleemcode: de code van zod, zoals too_big of unrecognized_keys, plus twee eigen codes. missing, omdat zod een ontbrekend veld invalid_type
-noemt, net als een verkeerd type, en dat is voor beheer een ander probleem. order, omdat zod de volgorde niet controleert.
+\* Probleemcode: de code van zod, zoals too_big of unrecognized_keys, plus drie eigen codes. missing, omdat zod een ontbrekend veld invalid_type
+noemt, net als een verkeerd type, en dat is voor beheer een ander probleem. order, omdat zod de volgorde niet controleert. choice, als een object
+met choice geen of meer dan één veld heeft.
 
 Alleen zod en de Powertools Logger, geen extra libraries.
 
@@ -46,7 +51,7 @@ Meldingen zijn de teksten van zod, met een eigen tekst waar zod onduidelijk is (
 zijn teksten, dus er komen geen persoonsgegevens in de logs boven debug, zonder lijst met geheime velden. Op de probleemcode kunnen beheer in de
 logs en de aanroepende code in het resultaat zoeken. Met segments en limit kan de aanroepende code een probleem zelf herstellen.
 
-Nadelen: problems.ts leest de foutcodes van zod en fieldOrder leest de opbouw van het schema (shape, unwrap, element). Die veranderen
+Nadelen: problems.ts leest de foutcodes van zod en fieldOrder leest de opbouw van het schema (shape, unwrap, element, meta). Die veranderen
 waarschijnlijk alleen bij een nieuwe hoofdversie van zod. fieldOrder kijkt door .optional() en z.array heen; een object binnen bijvoorbeeld
 .nullable() krijgt geen volgordecontrole.
 
@@ -84,8 +89,9 @@ de juiste volgorde.
 
 ### Waarom niet alleen de probleemcodes van zod?
 
-We gebruiken ze wel, op twee na. Zod noemt een ontbrekend veld invalid_type, net als een verkeerd type. Voor beheer en voor herstel zijn dat
-twee verschillende problemen, dus een ontbrekend veld heet missing. En zod kent geen volgorde, dus een volgordefout heet order.
+We gebruiken ze wel, op drie na. Zod noemt een ontbrekend veld invalid_type, net als een verkeerd type. Voor beheer en voor herstel zijn dat
+twee verschillende problemen, dus een ontbrekend veld heet missing. Zod kent geen volgorde, dus een volgordefout heet order. En "precies één van"
+controleert fieldOrder, dus die fout heet choice.
 
 ### Waarom gooit de validator nooit een exception?
 
