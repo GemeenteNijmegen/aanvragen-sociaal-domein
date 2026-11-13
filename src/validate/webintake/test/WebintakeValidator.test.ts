@@ -1,5 +1,6 @@
 import { Logger } from '@aws-lambda-powertools/logger';
 import { MessageValidator, WebintakeValidator } from '../WebintakeValidator';
+import adresTelefoon from './examples/adres-telefoon.json';
 import berichtsoort from './examples/berichtsoort.json';
 import client from './examples/client.json';
 import errors from './examples/errors.json';
@@ -101,17 +102,43 @@ describe('WebintakeValidator', () => {
     ]);
   });
 
+  it('reports wrong address fields and a wrong second phone number', () => {
+    captureLogs();
+    expect(validator.validate(adresTelefoon, { logger: newLogger() }).problems).toEqual([
+      {
+        path: 'Client.Correspondentieadres.Straatnaam',
+        segments: ['Client', 'Correspondentieadres', 'Straatnaam'],
+        code: 'too_big',
+        detail: 'Too big: expected string to have <=24 characters',
+        limit: { max: 24 },
+      },
+      {
+        path: 'Client.Correspondentieadres.Postcode',
+        segments: ['Client', 'Correspondentieadres', 'Postcode'],
+        code: 'invalid_format',
+        detail: 'Expected a postcode as 1234AB',
+      },
+      {
+        path: 'Client.Telefoonnr[1].Abonneenr',
+        segments: ['Client', 'Telefoonnr', 1, 'Abonneenr'],
+        code: 'invalid_format',
+        detail: 'Expected up to 10 digits',
+      },
+    ]);
+  });
+
   it('keeps personal data out of non-debug lines and tags every line', () => {
     const logs = captureLogs();
     validator.validate(errors, { logger: newLogger(), context: { mode: 'dry-run' } });
     validator.validate(client, { logger: newLogger(), context: { mode: 'dry-run' } });
-    for (const personalData of ['verzonnen toelichting', '12345678', 'Verzonnen1']) {
+    validator.validate(adresTelefoon, { logger: newLogger(), context: { mode: 'dry-run' } });
+    for (const personalData of ['verzonnen toelichting', '12345678', 'Verzonnen1', 'Verzonnenstraatnaam', '9999 ZZ', '9999999X']) {
       const contains = (line: LogLine) => JSON.stringify(line).includes(personalData);
       expect(logs.filter((line) => line.level !== 'DEBUG').some(contains)).toBe(false);
       expect(logs.filter((line) => line.level === 'DEBUG').some(contains)).toBe(true);
     }
     for (const line of logs) {
-      expect(line).toMatchObject({ zaakIdentificatie: expect.stringMatching(/^OF-TEST-000[24]$/), context: { mode: 'dry-run' } });
+      expect(line).toMatchObject({ zaakIdentificatie: expect.stringMatching(/^OF-TEST-000[245]$/), context: { mode: 'dry-run' } });
     }
   });
 

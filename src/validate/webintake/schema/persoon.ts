@@ -1,21 +1,25 @@
 import { z } from 'zod';
+import { adres, adresWijkcode } from './adres';
 import {
   aanduidingNaamgebruik,
+  abonneenr,
   bic,
   bsn,
   cdFictieveDatum,
+  cdNationaliteit,
   datum,
   emailAdres,
   geslacht,
   iban,
   naam,
+  netnr,
+  typeTelefoonnr,
   voorletters,
   voorvoegsel,
 } from './fieldRules';
 
-const adres = z.looseObject({});
-const telefoonnr = z.looseObject({});
-const nationaliteit = z.looseObject({});
+const telefoonnr = z.strictObject({ Netnr: netnr.optional(), Abonneenr: abonneenr.optional(), TypeTelefoonnr: typeTelefoonnr.optional() });
+const nationaliteit = z.strictObject({ CdNationaliteit: cdNationaliteit });
 const relatie = z.looseObject({});
 
 export const persoon = z.strictObject({
@@ -31,7 +35,7 @@ export const persoon = z.strictObject({
   Geboortedatum: datum,
   CdFictieveGeboortedat: cdFictieveDatum,
   Correspondentieadres: adres.optional(),
-  Feitelijkadres: adres.optional(),
+  Feitelijkadres: adresWijkcode.optional(),
   Nationaliteit: nationaliteit.optional(),
   Iban: iban.optional(),
   Bic: bic.optional(),

@@ -16,8 +16,39 @@
     "Geslacht": "2",
     "Geboortedatum": "19800101",
     "CdFictieveGeboortedat": "0",
+    "Correspondentieadres": {
+      "Straatnaam": "Teststraat",
+      "Huisnummer": "1",
+      "Huisletter": "A",
+      "Postcode": "9999ZZ",
+      "Woonplaatsnaam": "Testdorp",
+      "Gemeentenaam": "Testgemeente"
+    },
+    "Feitelijkadres": {
+      "Straatnaam": "Verzonnenlaan",
+      "Huisnummer": "99",
+      "HuisnrToevoeging": "bis",
+      "Postcode": "9999ZY",
+      "Woonplaatsnaam": "Testdorp",
+      "Wijkcode": "01"
+    },
+    "Nationaliteit": {
+      "CdNationaliteit": "0001"
+    },
     "Iban": "NL00TEST0123456789",
     "Bic": "TESTNL2A",
+    "Telefoonnr": [
+      {
+        "Netnr": "0999",
+        "Abonneenr": "999999",
+        "TypeTelefoonnr": "01"
+      },
+      {
+        "Netnr": "06",
+        "Abonneenr": "99999999",
+        "TypeTelefoonnr": "02"
+      }
+    ],
     "EMailAdresClient": "test@voorbeeld.invalid"
   }
 }
