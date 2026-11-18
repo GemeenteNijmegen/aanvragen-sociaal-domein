@@ -19,7 +19,7 @@ export interface MessageValidator {
   /**
    * Validates the message and reports all problems at once.
    *
-   * Never throws, also not when the validator itself fails, and never changes the input.
+   * Never throws, whatever the input and also when the validation itself fails, and never changes the input. Assumes a working logger.
    * Field values are only logged at debug level.
    *
    * @param input The message as received. Any value is accepted, also `undefined` or `null`.
@@ -40,6 +40,8 @@ export interface ValidationOptions {
   /**
    * Added as `context` to every log line, so lines of one kind of use can be told apart in the logs.
    *
+   * Logged at every level, so it must not contain personal data.
+   *
    * @example
    * // Dry run: the validator runs next to the existing flow on real messages and the caller does nothing with the result.
    * // Shows which messages would be rejected and why, without risk, and shows false reports before the flow acts on them.
@@ -53,6 +55,8 @@ export interface ValidationOptions {
    * Each validator implementation can have a default grouping key taken from the message, see the JSDoc of that validator
    * (Webintake: `zaakIdentificatie`, or `unknown`). Without logKeys that default is used. Pass a key here only when the message does not
    * contain it, or to add keys such as a form reference. Keys given here win over the default.
+   *
+   * Logged at every level, so they must not contain personal data.
    *
    * @example { zaakIdentificatie: 'OF-1234' }
    */

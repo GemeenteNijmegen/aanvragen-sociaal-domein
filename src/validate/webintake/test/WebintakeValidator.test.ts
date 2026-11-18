@@ -60,7 +60,7 @@ describe('WebintakeValidator', () => {
           detail: 'Too big: expected string to have <=1200 characters',
           limit: { max: 1200 },
         },
-        { path: 'Webintake', segments: [], code: 'unrecognized_keys', detail: 'Unrecognized key: "Email"' },
+        { path: 'Webintake', segments: [], code: 'unrecognized_keys', detail: '1 unrecognized key' },
         {
           path: 'Client',
           segments: ['Client'],
@@ -142,7 +142,7 @@ describe('WebintakeValidator', () => {
         path: 'Client.Relatie.Partner',
         segments: ['Client', 'Relatie', 'Partner'],
         code: 'unrecognized_keys',
-        detail: 'Unrecognized key: "Relatie"',
+        detail: '1 unrecognized key',
       },
       {
         path: 'Client.BijstandspersoonOverig[1].Geboortedatum',
@@ -177,6 +177,15 @@ describe('WebintakeValidator', () => {
     for (const line of logs) {
       expect(line).toMatchObject({ zaakIdentificatie: expect.stringMatching(/^OF-TEST-000[245]$/), context: { mode: 'dry-run' } });
     }
+  });
+
+  it('keeps the names of unrecognized keys out of non-debug lines', () => {
+    const logs = captureLogs();
+    const result = validator.validate({ ...valid, 'Verzonnen Persoon 999999990': 'x' }, { logger: newLogger() });
+    expect(result.problems).toEqual([{ path: 'Webintake', segments: [], code: 'unrecognized_keys', detail: '1 unrecognized key' }]);
+    const contains = (line: LogLine) => JSON.stringify(line).includes('Verzonnen Persoon');
+    expect(logs.filter((line) => line.level !== 'DEBUG').some(contains)).toBe(false);
+    expect(logs.filter((line) => line.level === 'DEBUG').some(contains)).toBe(true);
   });
 
   it('never throws and never changes the message', () => {
