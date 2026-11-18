@@ -48,7 +48,8 @@ met choice geen of meer dan één veld heeft.
 Alleen zod en de Powertools Logger, geen extra libraries.
 
 Meldingen zijn de teksten van zod, met een eigen tekst waar zod onduidelijk is (ontbrekend veld, datum, volgorde). Zod zet geen invoerwaarden in
-zijn teksten, dus er komen geen persoonsgegevens in de logs boven debug, zonder lijst met geheime velden. Op de probleemcode kunnen beheer in de
+zijn teksten, behalve de namen van onbekende velden. Daar zegt detail alleen hoeveel het er zijn; de namen staan met hun waarden op debug. Zo
+komen er geen persoonsgegevens in de logs boven debug, zonder lijst met geheime velden. Op de probleemcode kunnen beheer in de
 logs en de aanroepende code in het resultaat zoeken. Met segments en limit kan de aanroepende code een probleem zelf herstellen.
 
 Nadelen: problems.ts leest de foutcodes van zod en fieldOrder leest de opbouw van het schema (shape, unwrap, element, meta). Die veranderen
@@ -96,7 +97,7 @@ controleert fieldOrder, dus die fout heet choice.
 ### Waarom gooit de validator nooit een exception?
 
 Zodat validatie de aanroepende code nooit kan laten falen, ook niet in productie naast een bestaande flow. Een fout in de validator zelf geeft
-status error; dat zegt niets over het bericht.
+status error; dat zegt niets over het bericht. De validator gaat uit van een werkende logger: een logger die zelf faalt, vangt hij niet af.
 
 Ook een ongeldig bericht geeft geen exception maar een resultaat met de problemen. Dan kan de aanroepende code zelf beslissen wat er gebeurt.
 Een straatnaam van 30 tekens, waar 24 mag, hoeft het bericht niet tegen te houden: met code too_big, segments en limit kan eigen code de

@@ -1,7 +1,7 @@
 # Validatie
 
 Controleert een bericht op vorm voordat het verstuurd wordt. Elk probleem wordt gelogd en teruggegeven, zodat de aanroepende code erop kan
-handelen. De validator gooit nooit en verandert het bericht niet.
+handelen. De validator gooit nooit, welke invoer ook, en verandert het bericht niet. Hij gaat uit van een werkende logger.
 
 ## Gebruik
 

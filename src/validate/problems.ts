@@ -32,7 +32,8 @@ export interface ProblemWithValue {
 /**
  * Turns zod issues and structure issues (order and choice) into problems. Zod issues must come from safeParse with `reportInput: true`.
  *
- * Zod messages contain no input values, so detail never holds personal data. The value is returned apart, for the debug log only.
+ * Detail never holds personal data. Zod messages contain no input values, except the names of unrecognized keys, so those get a detail of
+ * our own with only the count. The value, and for unrecognized keys also the names, is returned apart, for the debug log only.
  */
 export function toProblems(rootName: string, issues: z.core.$ZodIssue[], structureIssues: StructureIssue[]): ProblemWithValue[] {
   const fieldProblems = issues.map((issue): ProblemWithValue => {
@@ -43,7 +44,9 @@ export function toProblems(rootName: string, issues: z.core.$ZodIssue[], structu
     if (issue.code === 'unrecognized_keys') {
       const object = issue.input as Record<string, unknown>;
       const unknownValues = Object.fromEntries(issue.keys.map((key) => [key, object[key]]));
-      return { problem: { ...location, code: issue.code, detail: issue.message }, value: unknownValues };
+      const count = issue.keys.length;
+      const detail = `${count} unrecognized ${count === 1 ? 'key' : 'keys'}`;
+      return { problem: { ...location, code: issue.code, detail }, value: unknownValues };
     }
     const limit = limitOf(issue);
     return { problem: { ...location, code: issue.code, detail: issue.message, ...(limit ? { limit } : {}) }, value: issue.input };
