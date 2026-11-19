@@ -1,0 +1,27 @@
+{
+  "Berichtsoort": {
+    "VRIJ": {
+      "Onderwerp": "50",
+      "Categorie": "50"
+    }
+  },
+  "AardVerzoek": "RT",
+  "Aanvraagdatum": "20260101",
+  "ZaakIdentificatie": "OF-TEST-0007",
+  "Toelichting": "Form: verzonnen-formulier",
+  "Client": {
+    "Geboortedatum": "19800101",
+    "CdFictieveGeboortedat": "0",
+    "Geslacht": "2",
+    "BurgerServiceNr": "999999999",
+    "Voornamen": "Testa",
+    "Voorvoegsel": "",
+    "Achternaam": "Verzonnen",
+    "Telefoonnr": [
+      {
+        "Abonneenr": "06-99999999"
+      }
+    ],
+    "EMailAdresClient": "test@voorbeeld.invalid"
+  }
+}
